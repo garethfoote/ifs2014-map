@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- <link rel="stylesheet" href="css/main.css"> -->
+
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css" />
+        <link rel="stylesheet" href="css/main.css" />
+
+        <script src="js/vendor/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+        <script src="js/vendor/zepto/zepto.min.js"></script>
+        <script src="js/vendor/lodash/lodash.min.js"></script>
+        <script src="js/vendor/backbone/backbone-min.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+            window.getParameter = function(name) {
+                name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+                return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="app">
+            <div id="map">
+            </div>
+            <div class="overlay">
+                <div class="overlay__inner">
+                    <div class="filters-panel clearfix">
+                        <div class="filters-panel__filter">
+                            <a href="#" data-type="studio" class="filter filter__type js-filter-type is-selected">Studio</a>
+                            <a href="#" data-type="showcase" class="filter filter__type js-filter-type">Showcase</a>
+                        </div>
+                        <div class="filters-panel__filter filters-panel__filter--twocols js-filters-panel-countries clearfix">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay overlay--content">
+                <div class="overlay__inner clearfix">
+                    <div id="content">
+                        <div class="content__items clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <a class="controls__filters is-open" href="">+</>
+            </div>
+        </div>
+
+        <script id="ifstpl__filter-country" type="text/template">
+
+            <span class="filter__country-inner"><%= country %></span>
+
+        </script>
+
+        <script id="ifstpl__content-item" type="text/template">
+
+            <div class="content-item__image">
+                <img src="<%= images.low_resolution.url %>" />
+                <div style="background-image: url('<%= images.low_resolution.url %>');"
+                    class="replacement"></div>
+            </div>
+            <span class="content-item__author"><%= user.full_name %></span>
+
+        </script>
+
+        <script src="js/views.js"></script>
+        <script src="js/main.js"></script>
+
+    </body>
+</html>

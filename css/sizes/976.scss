@@ -1,0 +1,169 @@
+&.aw__root {
+    max-width: (976px - 16px * 2);
+    padding: 16px;
+}
+
+// Show sliders instead of joggers at this size
+.widgetSlider {
+    display: block;
+}
+
+.widgetJogger {
+    display: none;
+}
+
+.aw__header {
+    margin-bottom: 16px;
+}
+
+.aw__header-intro {
+    display: block;
+    margin-top: 16px + 10px;
+}
+
+.aw__footer {
+    margin-top: 17px + 13px;
+}
+
+.aw__section-header label {
+    font-size: font-size(22);
+    line-height: (32em / 22) !important;
+}
+
+.aw__readout-label,
+.aw__section--apr label,
+.aw__section--apr-compare label, {
+    font-size: font-size(20);
+    line-height: (29em / 20) !important;
+}
+
+.aw__readout-total {
+    font-size: font-size(40);
+}
+
+.aw__section--loan input,
+.aw__section--duration .aw__input-duration-facade {
+    font-size: font-size(24);
+    height: (30em / 24);
+    line-height: (30em / 24);
+}
+
+.aw__input-loan:before {
+    font-size: font-size(24) !important;
+    line-height: (30em / 24);
+}
+
+.aw__input-interest {
+    &:after {
+        font-size: font-size(22);
+        line-height: (27em / 22);
+    }
+
+    input {
+        font-size: font-size(22);
+        height: (27em / 22);
+    }
+}
+
+.aw__header-heading {
+    font-size: font-size(22);
+}
+
+.aw__header-heading--branded {
+    padding-left: 86px + 14px;
+
+    .aw__sprite {
+        @extend .aw__sprite-bbc-logo-big;
+        margin: -12px 0 0 0;
+    }
+}
+
+.aw__chart {
+    height: 120px;
+    margin-bottom: 83px;
+}
+
+.aw__chart-curve-point {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+}
+
+.aw__section-header {
+    min-height: 50px;
+}
+
+.aw__section-header--filled {
+    padding: 5px;
+
+    label {
+        padding-left: 9px;
+    }
+}
+
+.aw__section-header--outlined {
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+
+.aw__readout-total,
+.aw__section-header .aw__input {
+    clear: none;
+}
+
+.aw__readout-total {
+    margin: 3px 0 0 0;
+}
+
+.aw__help {
+    top: 3px;
+}
+
+.aw__footer-button {
+    width: auto;
+}
+
+.aw__footer-button span {
+    font-size: font-size(22) !important;
+}
+
+.aw__interest--compare {
+    margin-top: 27px;
+}
+
+&.aw__do-compare {
+    .aw__chart {
+        height: 100px;
+    }
+
+    .aw__section--apr .aw__section-header,
+    .aw__section--apr-compare .aw__section-header,
+    .aw__section-header--outlined {
+        min-height: 0;
+    }
+
+    .aw__section--apr label,
+    .aw__section--apr-compare label {
+        margin: 0;
+    }
+
+    .aw__readout-label {
+        margin-bottom: 0;
+    }
+
+    .aw__readout-total {
+        padding: 0;
+        margin: 0;
+        font-size: font-size(30);
+        line-height: (29em / 30) !important;
+    }
+
+    // TODO: Move these margins to chart
+    .widgetSlider {
+        margin-bottom: (49px - 20px);
+    }
+
+    .aw__chart {
+        margin-bottom: (83px - 34px);
+    }
+}

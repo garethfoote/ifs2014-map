@@ -1,0 +1,152 @@
+body {
+    font-size: $doc-font-size+px;
+    font-family: Arial, sans-serif;
+    background-color: lightgrey;
+}
+
+p {
+    @include font-size(16);
+    @include margin-distribution(0, 1);
+}
+
+h1 {
+    @include font-size(26);
+    @include margin-distribution();
+}
+
+h2 {
+    @include font-size(22);
+    @include margin-distribution(0.75, 0.25);
+}
+
+h3 {
+    @include font-size(22);
+    @include margin-distribution(0.75, 0.25);
+}
+
+.no-js {
+    display: none;
+}
+
+form {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    overflow: visible;
+}
+
+a:focus,
+button:focus,
+input:focus,
+select:focus, {
+    outline: $focus-outline;
+}
+
+// Remove inner padding and border in Firefox 3+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+button,
+input,
+select {
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+    *vertical-align: middle;
+}
+
+button,
+input {
+    line-height: normal;
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    border-radius: 0;
+}
+
+abbr {
+    border: 0;
+}
+
+/*--- Base ---*/
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+input[type="text"],
+input[type="url"],
+input[type="email"] {
+    font-size: 20px;
+    font-size: (20/$doc-font-size)*1rem;
+    height: auto;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+}
+
+/*--- Document ---*/
+.document {
+    padding: 0 5%;
+    background: white;
+}
+
+@media (min-width: 600px)  {
+    .document {
+        max-width: 1023px;
+        margin: 0 auto;
+        padding: 0 1%;
+    }
+}
+
+/*--- Header ---*/
+.header {
+    overflow: hidden;
+}
+
+/*--- Footer ---*/
+.footer {
+    margin-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/*--- Modules ---*/
+.btn {
+    display: block;
+    @include font-size( 16 );
+    background: #ff00ff;
+    border-radius: 5px;
+    text-align: center;
+    padding: 12px 0;
+    padding: 0.75rem 0;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #006dcc;
+    *background-color: #0044cc;
+    background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+    background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+    background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+    background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+    background-repeat: repeat-x;
+    border-color: #0044cc #0044cc #002a80;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn:hover {
+    background-color: #0044cc;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 5px rgba(0,0,0,.25);
+}

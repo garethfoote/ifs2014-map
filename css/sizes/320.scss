@@ -1,0 +1,48 @@
+// Only compare styles as 320px is the default breakpoint
+&.aw__do-compare {
+    .aw__chart {
+        height: 34px;
+        margin-bottom: (44px - 7px);
+        margin-top: (48px - 8px);
+    }
+
+    .aw__section--apr,
+    .aw__section--apr-compare {
+        .aw__section-header label {
+            margin-bottom: 0;
+            line-height: (24em / 16);
+        }
+    }
+
+    .aw__input-interest {
+        clear: none;
+
+        &:after,
+        input {
+            font-size: font-size(16);
+            line-height: (22em / 16);
+        }
+
+        input {
+            height: (22em / 16);
+        }
+    }
+
+    .aw__section-header--outlined {
+
+    }
+
+    .aw__readout-label {
+        line-height: (24em / 16) !important;
+        margin-bottom: 0;
+    }
+
+    .aw__readout-total {
+        clear: none;
+        padding: 0;
+        margin: 0;
+        font-size: font-size(18);
+        // line-height: (24em / 18) !important;
+        line-height: 24px !important;
+    }
+}

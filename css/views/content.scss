@@ -1,0 +1,51 @@
+$item-width: 140px;
+$item-border: 8px;
+$item-border-radius: 3px;
+
+#content {
+    pointer-events:none;
+    background-color: $colour-panelbg;
+    height: 100%;
+}
+
+.content__items {
+    padding: 70px $item-border 0 0;
+    width: ($item-width+$item-border)*2;
+}
+
+.content-item {
+    width:  140px;
+    background: white;
+    @include vendor-prefix(border-radius, $item-border-radius);
+    margin: 0 0 $item-border $item-border;
+    float: left;
+}
+
+.content-item__image {
+    min-height: 140px;
+    position: relative;
+    img {
+        visibility: hidden;
+    }
+    .replacement {
+        @include vendor-prefix(border-radius, $item-border-radius $item-border-radius 0 0);
+        position: absolute;
+        top: 0;
+        width:  100%;
+        height: 100%;
+        background-size: 100% 100%;
+    }
+}
+
+// No rounded corners.
+.lt-ie9 {
+    .content-item__image {
+        position: static;
+        img {
+            visibility: visible;
+        }
+    }
+    .replacement {
+        display: none;
+    }
+}

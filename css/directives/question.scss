@@ -1,0 +1,66 @@
+.question {
+    width: 100%;
+    float: left;
+}
+
+.question {
+    margin-bottom: 1.5rem;
+    fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.question__index {
+    display: block;
+    @include font-size(18);
+}
+
+.question__copy {
+    display: block;
+    @include font-size(16);
+    @include margin-distribution(0, 1);
+    font-weight: bold;
+}
+
+.question__submit {
+    display: block;
+    width: 60%;
+    margin: 0 20%;
+    clear: left;
+}
+
+.question__answer-label {
+    @include font-size(14);
+    .sprite {
+        // Sprite is 16px in height. Need to add 4px top margin.
+        margin-top: 0.25em;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 966px)  {
+    $columns:2;
+    $margin: 4; // %
+    .question {
+        width: (100%-($margin*($columns - 1)))/$columns;
+        margin-left: $margin + 0%;
+    }
+    .question:nth-child(odd){
+        margin-left: 0;
+        clear: left;
+    }
+}
+
+@media (min-width: 967px) {
+    $columns:3;
+    $margin: 4; // %
+    .question {
+        width: (100%-($margin*($columns - 1)))/$columns;
+        margin-left: $margin + 0%;
+    }
+    .question:nth-child( #{$columns}n+1 ){
+        margin-left: 0;
+        clear: left;
+    }
+}

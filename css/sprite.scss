@@ -1,0 +1,172 @@
+.sprite {
+    background: url('../img/sprite.png') no-repeat 0 0;
+}
+
+.sprite-fullscreen-close {
+    background-position: -2px -2px;
+    width: 18px;
+    height: 18px;
+}
+.sprite-back-sml {
+    background-position: -24px -2px;
+    width: 18px;
+    height: 18px;
+}
+.sprite-play {
+    background-position: -2px -24px;
+    width: 18px;
+    height: 18px;
+}
+.sprite-down-sml {
+    background-position: -24px -24px;
+    width: 18px;
+    height: 18px;
+}
+.sprite-next-sml {
+    background-position: -46px -2px;
+    width: 18px;
+    height: 18px;
+}
+.sprite-apr-handle-sml {
+    background-position: -46px -24px;
+    width: 18px;
+    height: 10px;
+}
+.sprite-fullscreen {
+    background-position: -2px -46px;
+    width: 18px;
+    height: 18px;
+}
+.sprite-radio_checked {
+    background-position: -24px -46px;
+    width: 16px;
+    height: 16px;
+}
+.sprite-radio_unchecked {
+    background-position: -44px -46px;
+    width: 16px;
+    height: 16px;
+}
+.sprite-info-red {
+    background-position: -68px -2px;
+    width: 16px;
+    height: 16px;
+}
+.sprite-info-white {
+    background-position: -68px -22px;
+    width: 16px;
+    height: 16px;
+}
+.sprite-close {
+    background-position: -68px -42px;
+    width: 14px;
+    height: 14px;
+}
+.sprite-dropdown {
+    background-position: -2px -68px;
+    width: 10px;
+    height: 6px;
+}
+.sprite-close-tooltip {
+    background-position: -88px -2px;
+    width: 10px;
+    height: 10px;
+}
+.sprite-apr-handle-right-sml {
+    background-position: -88px -16px;
+    width: 6px;
+    height: 10px;
+}
+
+
+@mixin sprite-fullscreen-close() {
+    background-position: -2px -2px;
+    width: 18px;
+    height: 18px;
+}
+
+@mixin sprite-back-sml() {
+    background-position: -24px -2px;
+    width: 18px;
+    height: 18px;
+}
+
+@mixin sprite-play() {
+    background-position: -2px -24px;
+    width: 18px;
+    height: 18px;
+}
+
+@mixin sprite-down-sml() {
+    background-position: -24px -24px;
+    width: 18px;
+    height: 18px;
+}
+
+@mixin sprite-next-sml() {
+    background-position: -46px -2px;
+    width: 18px;
+    height: 18px;
+}
+
+@mixin sprite-apr-handle-sml() {
+    background-position: -46px -24px;
+    width: 18px;
+    height: 10px;
+}
+
+@mixin sprite-fullscreen() {
+    background-position: -2px -46px;
+    width: 18px;
+    height: 18px;
+}
+
+@mixin sprite-radio_checked() {
+    background-position: -24px -46px;
+    width: 16px;
+    height: 16px;
+}
+
+@mixin sprite-radio_unchecked() {
+    background-position: -44px -46px;
+    width: 16px;
+    height: 16px;
+}
+
+@mixin sprite-info-red() {
+    background-position: -68px -2px;
+    width: 16px;
+    height: 16px;
+}
+
+@mixin sprite-info-white() {
+    background-position: -68px -22px;
+    width: 16px;
+    height: 16px;
+}
+
+@mixin sprite-close() {
+    background-position: -68px -42px;
+    width: 14px;
+    height: 14px;
+}
+
+@mixin sprite-dropdown() {
+    background-position: -2px -68px;
+    width: 10px;
+    height: 6px;
+}
+
+@mixin sprite-close-tooltip() {
+    background-position: -88px -2px;
+    width: 10px;
+    height: 10px;
+}
+
+@mixin sprite-apr-handle-right-sml() {
+    background-position: -88px -16px;
+    width: 6px;
+    height: 10px;
+}
+
+

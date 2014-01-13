@@ -1,0 +1,54 @@
+@function percentagewidth($px, $basewidth) {
+    @return $px/$basewidth * 100%;
+}
+
+@function font-size($px) {
+    // Use px as we don't know base font size where embedded
+    // @return ($px / 16) * 1em;
+    @return $px * 1px;
+}
+
+@mixin translate($x, $y) {
+    -webkit-transform: translate($x, $y);
+    -moz-transform: translate($x, $y);
+    -ms-transform: translate($x, $y);
+    -o-transform: translate($x, $y);
+    transform: translate($x, $y);
+}
+
+@mixin translate3d($x, $y, $z) {
+    -webkit-transform: translate3d($x, $y, $z);
+    -moz-transform: translate3d($x, $y, $z);
+    -o-transform: translate3d($x, $y, $z);
+    transform: translate3d($x, $y, $z);
+}
+
+@mixin transition($transition...) {
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    transition: $transition;
+}
+
+// Helps with vertical rhythm.
+@mixin font-size($size, $line-height:$doc-line-height) {
+    font-size: 0px + $size;
+    font-size: $size / $doc-font-size +rem;
+    line-height: round($line-height / $size*10000) / 10000;
+}
+
+// Helps with vertical rhythm.
+@mixin margin-distribution($top:1, $bottom:0, $line-height:$doc-line-height) {
+    margin-top: 0px + ($top*$doc-line-height);
+    margin-bottom: 0px + ($bottom*$doc-line-height);
+    margin-top: ($top*($doc-line-height / $doc-font-size))+rem ;
+    margin-bottom: ($bottom*($doc-line-height / $doc-font-size))+rem ;
+}
+
+@mixin vendor-prefix($name, $argument) {
+    -webkit-#{$name}: #{$argument};
+    -ms-#{$name}: #{$argument};
+    -moz-#{$name}: #{$argument};
+    -o-#{$name}: #{$argument};
+    #{$name}: #{$argument};
+}

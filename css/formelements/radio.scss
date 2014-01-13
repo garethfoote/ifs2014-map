@@ -1,0 +1,34 @@
+fieldset[data-ui='radios'] label {
+    position: relative;
+    float: left;
+    padding-left: 6.75%;
+    margin-right: 3%;
+    cursor: pointer;
+}
+
+fieldset[data-ui='radios'] label.first-child {
+    // margin-left: 0;
+}
+
+fieldset[data-ui='radios'] label input {
+    width: 0;
+    height: 0;
+    clip: rect(0 0 0 0);
+    border: 0;
+    margin: -1px;
+}
+
+fieldset[data-ui='radios'] label .sprite {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+fieldset[data-ui='radios'] label .sprite {
+    @include sprite-radio_unchecked();
+}
+
+fieldset[data-ui='radios'] label.is_checked .sprite {
+    @include sprite-radio_checked();
+}
+

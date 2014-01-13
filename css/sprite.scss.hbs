@@ -1,0 +1,18 @@
+.sprite {
+    background: url('../img/sprite.png') no-repeat 0 0;
+}
+
+{{#sprites}}.sprite-{{name}} {
+    background-position: -{{x}}px -{{y}}px;
+    width: {{width}}px;
+    height: {{height}}px;
+}
+{{/sprites}}
+
+{{#sprites}}@mixin sprite-{{name}}() {
+    background-position: -{{x}}px -{{y}}px;
+    width: {{width}}px;
+    height: {{height}}px;
+}
+
+{{/sprites}}
