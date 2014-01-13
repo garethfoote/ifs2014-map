@@ -1,13 +1,27 @@
-var Pin = Backbone.Model.extend({
-    defaults: {
-        removed             : false,
-        "isfiltered-type"     : false,
-        "isfiltered-country"  : false
-    }
-});
+var PinView = Backbone.View.extend({
+    el : $("#content"),
+    children : {},
 
-var Pins = Backbone.Collection.extend({
-    model: Pin
+    initialize : function(){
+
+        this.collection.on("change:inviewport", this.filteredHandler, this);
+        this.collection.on("change:isfiltered-country", this.filteredHandler, this);
+        this.collection.on("change:isfiltered-type", this.filteredHandler, this);
+
+    },
+
+    filteredHandler : function(item){
+
+        if( item.get("inviewport") === true
+            && item.get("isfiltered-country") === false
+            && item.get("isfiltered-type") === false ){
+            this.addone( item );
+        } else {
+            this.removeone( item );
+        }
+
+    }
+
 });
 
 var ContentItem = Backbone.Model.extend({
@@ -59,12 +73,12 @@ var app = (function(){
                 togglingOff = ( currentcountryfilter === countryfilter ),
                 bounds = [], activeType = false;
 
-
             // Set current or remove current.
             currentcountryfilter = togglingOff === true ? "" : countryfilter;
 
             for(var c in countrygroups){
                 if( ! togglingOff && c != countryfilter ){
+                    console.log("Remove", c);
                     // All countries not clicked on. i.e. isfiltered==true
                     map.removeLayer( countrygroups[c] );
                     countrygroups[c].eachLayer(function(countrygroup){
@@ -77,9 +91,10 @@ var app = (function(){
                     });
                 } else {
                     // Country clicked on. i.e. isfiltered==false
-                    map.addLayer( countrygroups[c] );
+                    console.log("Add", c);
                     countrygroups[c].eachLayer(function(countrygroup){
                         countrygroup.eachLayer(function(layer){
+                            map.addLayer( layer );
                             i = layer.models.length;
                             while( i-- ){
                                 layer.models[i].set("isfiltered-country", false);
@@ -92,7 +107,7 @@ var app = (function(){
 
             // Scale to fit all markers.
             if( togglingOff === false ){
-                map.fitBounds(bounds);
+                // map.fitBounds(bounds, { maxZoom : 17 });
             } else {
                 map.fitWorld();
             }
@@ -115,7 +130,9 @@ var app = (function(){
         filterType = function(){
 
             console.log( "Type", currenttype );
+            var countryfiltered = false;
 
+            // ..and remove studio or showcase
             for(var t in typegroups){
                 if( t != currenttype ){
                     typegroups[t].eachLayer(function(layer){
@@ -189,9 +206,6 @@ var app = (function(){
                 countrygroups[country] = countrygroups[country] || L.layerGroup();
                 designergroups[userid] = L.layerGroup();
                 countrygroups[country].addLayer( designergroups[userid] );
-                if( isnewcountry ){
-                    typegroups[type].addLayer( countrygroups[country] );
-                }
 
                 // Get location. Either content or home.
                 var loc = _.isNull(item.get("location"))
@@ -212,13 +226,14 @@ var app = (function(){
                     lGroup = designergroups[userid];
                     lGroup.addLayer(pin);
                     // Add to either studio or showcase group.
+                    typegroups[type].addLayer( pin );
                 }
 
             });
 
             // Finally add the groups.
-            for(var t in typegroups){
-                map.addLayer( typegroups[t] );
+            for(var c in countrygroups){
+                map.addLayer( countrygroups[c] );
             }
 
             // this.filterType();
