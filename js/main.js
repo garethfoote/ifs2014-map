@@ -1,28 +1,71 @@
 var PinView = Backbone.View.extend({
-    el : $("#content"),
-    children : {},
+
+    layer : {},
+    map : {},
 
     initialize : function(){
 
-        this.collection.on("change:inviewport", this.filteredHandler, this);
-        this.collection.on("change:isfiltered-country", this.filteredHandler, this);
-        this.collection.on("change:isfiltered-type", this.filteredHandler, this);
+        // this.model.on("change:inviewport", this.filter, this);
+        this.model.on("change:isfiltered-country", this.filter, this);
+        this.model.on("change:isfiltered-type", this.filter, this);
 
     },
 
-    filteredHandler : function(item){
+    render : function( map ){
 
-        if( item.get("inviewport") === true
-            && item.get("isfiltered-country") === false
-            && item.get("isfiltered-type") === false ){
-            this.addone( item );
+        var marker;
+
+        this.map = map;
+
+        if( this.model.get("type") == "showcase" ){
+            marker = { icon : L.divIcon({className: 'showcase-marker'}) };
         } else {
-            this.removeone( item );
+            // marker = { icon : L.Icon.Default };
+        }
+
+        // Get location. Either content or home.
+        var loc = _.isNull(this.model.get("location"))
+                        ? this.model.get("home") : this.model.get("location");
+
+        this.layer = L.marker([loc.latitude, loc.longitude], marker);
+
+        // Contains mutliple models associated with this view.
+        // All models contain same data as far as this view is concerned
+        // e.g. lat long, country, type
+        this.extramodels = [];
+
+        return this;
+
+    },
+
+    addmodel : function( model ){
+
+        this.extramodels.push( model );
+
+    },
+
+    getExtraModels : function(){
+
+        return this.extramodels;
+
+    },
+
+    filter : function(){
+
+        console.log(this.model.get("country"), this.model.get("isfiltered-country"), this.model.get("isfiltered-type") );
+        if( this.model.get("isfiltered-country") === false
+            && this.model.get("isfiltered-type") === false ){
+            // console.log("Add", this);
+            this.map.addLayer( this.layer );
+        } else {
+            // console.log("Remove", this);
+            this.map.removeLayer( this.layer );
         }
 
     }
 
 });
+
 
 var ContentItem = Backbone.Model.extend({
     defaults: {
@@ -30,11 +73,26 @@ var ContentItem = Backbone.Model.extend({
         inviewport          : false,
         "isfiltered-type"     : false,
         "isfiltered-country"  : false
+    },
+    primarylocation : null,
+
+    getlocation : function(){
+
+        if( this.primarylocation ) {
+            return this.primarylocation
+        }
+
+        // Get location. Either content or home.
+        this.primarylocation= _.isNull(this.get("location"))
+                        ? this.get("home") : this.get("location");
+
+        return this.primarylocation
     }
+
 });
 
 var Items = Backbone.Collection.extend({
-    model: ContentItem
+    model: ContentItem,
 });
 
 var app = (function(){
@@ -71,47 +129,35 @@ var app = (function(){
 
             var i = 0,
                 togglingOff = ( currentcountryfilter === countryfilter ),
-                bounds = [], activeType = false;
+                bounds = [], activeType = false, loc = {};
 
             // Set current or remove current.
             currentcountryfilter = togglingOff === true ? "" : countryfilter;
 
-            for(var c in countrygroups){
-                if( ! togglingOff && c != countryfilter ){
-                    console.log("Remove", c);
-                    // All countries not clicked on. i.e. isfiltered==true
-                    map.removeLayer( countrygroups[c] );
-                    countrygroups[c].eachLayer(function(countrygroup){
-                        countrygroup.eachLayer(function(layer){
-                            i = layer.models.length;
-                            while( i-- ){
-                                layer.models[i].set("isfiltered-country", true);
-                            }
-                        });
-                    });
+            console.log("Filter", countryfilter);
+
+            models.each(function(item){
+                loc = item.getlocation();
+
+                if( togglingOff === true ){
+                    item.set("isfiltered-country", false);
                 } else {
-                    // Country clicked on. i.e. isfiltered==false
-                    console.log("Add", c);
-                    countrygroups[c].eachLayer(function(countrygroup){
-                        countrygroup.eachLayer(function(layer){
-                            map.addLayer( layer );
-                            i = layer.models.length;
-                            while( i-- ){
-                                layer.models[i].set("isfiltered-country", false);
-                            }
-                            bounds.push(layer.getLatLng());
-                        });
-                    });
+                    if(item.get("country") != countryfilter){
+                        item.set("isfiltered-country", true);
+                    } else {
+                        item.set("isfiltered-country", false);
+                        bounds.push([loc.latitude, loc.longitude]);
+                    }
                 }
-            }
+
+            });
 
             // Scale to fit all markers.
             if( togglingOff === false ){
-                // map.fitBounds(bounds, { maxZoom : 17 });
+                map.fitBounds(bounds, { maxZoom : 17 });
             } else {
                 map.fitWorld();
             }
-
 
         },
 
@@ -129,31 +175,22 @@ var app = (function(){
 
         filterType = function(){
 
-            console.log( "Type", currenttype );
-            var countryfiltered = false;
 
-            // ..and remove studio or showcase
-            for(var t in typegroups){
-                if( t != currenttype ){
-                    typegroups[t].eachLayer(function(layer){
-                        map.removeLayer( layer );
-                        _.each(layer.models, function(model){
-                            model.set("isfiltered-type", true);
-                        });
-                    });
+            models.each(function(item){
+                loc = item.getlocation();
+
+                if( item.get("type") !== currenttype ){
+                    item.set("isfiltered-type", true);
                 } else {
-                    typegroups[t].eachLayer(function(layer){
-                        map.addLayer( layer );
-                        _.each(layer.models, function(model){
-                            model.set("isfiltered-type", false);
-                        });
-                    });
+                    item.set("isfiltered-type", false);
                 }
-            }
+
+            });
 
         },
 
         handleData = function( data ){
+
             // Loop all items.
             for (var i = 0; i < data.length; i++) {
                 models.add(data[i]);
@@ -178,65 +215,40 @@ var app = (function(){
             });
 
             map.on("moveend", pinsWithinBounds);
-
         },
+
 
         renderPins = function(){
 
-            var pins = { showcase: [], studio: [] };
+            var pins = { showcase: [], studio: [] },
+                pin = {};
+
             models.each(function(item){
 
-                var userid = item.get("user_id"),
-                    country = item.get("country"),
-                    pin, lGroup = {},
-                    marker, type = "studio",
-                    isnewcountry = (country in countrygroups) ? false : true,
-                    currcountrygroups = {};
+                var type = "";
 
                 if( _.contains(item.get("custom_tags"), "showcase") ){
-                    type = "showcase";
-                    marker = { icon : L.divIcon({className: 'showcase-marker'}) };
+                    item.set("type", "showcase");
                 } else {
-                    type = "studio";
-                    // marker = { icon : L.Icon.Default };
+                    item.set("type", "studio");
                 }
 
-                // Organise into country and user hierarchy.
-                // Each user has a layer group.
-                countrygroups[country] = countrygroups[country] || L.layerGroup();
-                designergroups[userid] = L.layerGroup();
-                countrygroups[country].addLayer( designergroups[userid] );
-
-                // Get location. Either content or home.
-                var loc = _.isNull(item.get("location"))
-                                ? item.get("home") : item.get("location");
+                type = item.get("type");
+                loc = item.getlocation();
 
                 // If other pin exists here then just append model.
                 if( loc.latitude+""+loc.longitude in pins[type] ){
                     // Add model to same pin.
-                    pins[type][loc.latitude+""+loc.longitude].models.push( item );
+                    pins[type][loc.latitude+""+loc.longitude].addmodel( item );
                 } else {
                     // else make pin.
-                    pin = L.marker([loc.latitude, loc.longitude], marker);
-                    pins[type][loc.latitude+""+loc.longitude] = pin;
-                    // Add first model to pin. There may be more
-                    // particularly if they are at the users home location.
-                    pin.models = [item];
-                    // Add pin to layer group.
-                    lGroup = designergroups[userid];
-                    lGroup.addLayer(pin);
-                    // Add to either studio or showcase group.
-                    typegroups[type].addLayer( pin );
+                    pin = new PinView({model:item}).render(map);
+                    map.addLayer( pin.layer );
                 }
-
             });
 
-            // Finally add the groups.
-            for(var c in countrygroups){
-                map.addLayer( countrygroups[c] );
-            }
+            filterType();
 
-            // this.filterType();
         },
 
         renderFilters = function(){
@@ -250,8 +262,16 @@ var app = (function(){
             });
             */
 
-            for(var country in countrygroups){
-                filterview.addone( country );
+            var countries = [];
+            models.each(function(item){
+                var c = item.get("country");
+                if( countries.indexOf(c) < 0 ){
+                    countries.push(c);
+                }
+            });
+
+            for (var i = 0; i < countries.length; i++) {
+                filterview.addone( countries[i] );
             }
 
         },
@@ -262,23 +282,20 @@ var app = (function(){
                 currzoom = map.getZoom(),
                 i = 0, isWithinBounds = false;
 
-            for(var c in countrygroups){
-                // Nested leaflet layerGroups.
-                countrygroups[c].eachLayer(function (countrygroup) {
-                    countrygroup.eachLayer(function(layer){
-                        isWithinBounds = currbounds.contains(layer.getLatLng());
-                        i = layer.models.length;
-                        while( i-- ){
-                            if( currzoom >= 7 && isWithinBounds ){
-                                console.log("Add - Country: ", c);
-                                layer.models[i].set("inviewport", true);
-                            } else {
-                                layer.models[i].set("inviewport", false);
-                            }
-                        }
-                    });
-                });
-            }
+            models.each(function(item){
+                var loc = item.getlocation();
+
+                isWithinBounds = currbounds.contains(L.latLng(loc.latitude, loc.longitude));
+                if( currzoom >= 7 && isWithinBounds ){
+                    // console.log("In viewport");
+                    item.set("inviewport", true);
+                } else {
+                    // console.log("Not in viewport");
+                    item.set("inviewport", false);
+                }
+
+            });
+
         };
 
     return {
