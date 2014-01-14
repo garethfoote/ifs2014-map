@@ -19,6 +19,12 @@ $item-border-radius: 3px;
     @include vendor-prefix(border-radius, $item-border-radius);
     margin: 0 0 $item-border $item-border;
     float: left;
+    opacity: 0.55;
+}
+
+.content-item.is-focussed {
+    opacity: 1;
+    // background: #f72a34;
 }
 
 .content-item__image {

@@ -1,72 +1,3 @@
-var PinView = Backbone.View.extend({
-
-    layer : {},
-    map : {},
-
-    initialize : function(){
-
-        // this.model.on("change:inviewport", this.filter, this);
-        this.model.on("change:isfiltered-country", this.filter, this);
-        this.model.on("change:isfiltered-type", this.filter, this);
-
-    },
-
-    render : function( map ){
-
-        var marker;
-
-        this.map = map;
-
-        if( this.model.get("type") == "showcase" ){
-            marker = { icon : L.divIcon({className: 'showcase-marker'}) };
-        } else {
-            // marker = { icon : L.Icon.Default };
-        }
-
-        // Get location. Either content or home.
-        var loc = _.isNull(this.model.get("location"))
-                        ? this.model.get("home") : this.model.get("location");
-
-        this.layer = L.marker([loc.latitude, loc.longitude], marker);
-
-        // Contains mutliple models associated with this view.
-        // All models contain same data as far as this view is concerned
-        // e.g. lat long, country, type
-        this.extramodels = [];
-
-        return this;
-
-    },
-
-    addmodel : function( model ){
-
-        this.extramodels.push( model );
-
-    },
-
-    getExtraModels : function(){
-
-        return this.extramodels;
-
-    },
-
-    filter : function(){
-
-        console.log(this.model.get("country"), this.model.get("isfiltered-country"), this.model.get("isfiltered-type") );
-        if( this.model.get("isfiltered-country") === false
-            && this.model.get("isfiltered-type") === false ){
-            // console.log("Add", this);
-            this.map.addLayer( this.layer );
-        } else {
-            // console.log("Remove", this);
-            this.map.removeLayer( this.layer );
-        }
-
-    }
-
-});
-
-
 var ContentItem = Backbone.Model.extend({
     defaults: {
         removed             : false,
@@ -152,11 +83,13 @@ var app = (function(){
 
             });
 
-            // Scale to fit all markers.
-            if( togglingOff === false ){
-                map.fitBounds(bounds, { maxZoom : 17 });
-            } else {
-                map.fitWorld();
+            if( currenttype === "studio" ){
+                // scale to fit all markers.
+                if( togglingoff === true ){
+                    map.fitworld();
+                } else {
+                    map.fitbounds(bounds, { maxzoom : 17 });
+                }
             }
 
         },
@@ -175,6 +108,8 @@ var app = (function(){
 
         filterType = function(){
 
+            var bounds = [],
+                loc;
 
             models.each(function(item){
                 loc = item.getlocation();
@@ -183,9 +118,18 @@ var app = (function(){
                     item.set("isfiltered-type", true);
                 } else {
                     item.set("isfiltered-type", false);
+                    bounds.push([loc.latitude, loc.longitude]);
                 }
 
             });
+
+            if( currenttype === "showcase" ){
+                map.fitBounds(bounds, { maxzoom : 17 });
+            } else {
+                // TODO - Determine whether we want to do this 
+                // for studio. Speak to X,F & D.
+                // map.fitbounds(bounds, { maxzoom : 17 });
+            }
 
         },
 
@@ -215,8 +159,13 @@ var app = (function(){
             });
 
             map.on("moveend", pinsWithinBounds);
+            map.on("click", mapclickhandler, this );
+
         },
 
+        mapclickhandler = function(){
+            console.log("maplclickhandler");
+        },
 
         renderPins = function(){
 
@@ -244,6 +193,7 @@ var app = (function(){
                     // else make pin.
                     pin = new PinView({model:item}).render(map);
                     map.addLayer( pin.layer );
+                    pins[type][loc.latitude+""+loc.longitude] = pin;
                 }
             });
 
@@ -312,10 +262,6 @@ var app = (function(){
 window.onload = function(){
 
     // Set underscore templateing to handlebar style.
-    _.templateSettings = {
-          'interpolate': /{{([\s\S]+?)}}/g
-    };
-
     app.init();
 
     var xhr=new XMLHttpRequest();
