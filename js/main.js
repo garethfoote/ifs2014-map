@@ -273,3 +273,5 @@ window.onload = function(){
     // xhr.open("GET", "http://localhost:5000/output.json", false);
     // xhr.open("GET", "data/output001.json", false);
     xhr.send();
+
+};
