@@ -12,6 +12,10 @@
     float: left;
 }
 
+.has-hidden-filters .filters-panel {
+    left: (95+8+8+16)*-1px;
+}
+
 .filters-panel__filter--twocols {
 
     padding-left: 8px;

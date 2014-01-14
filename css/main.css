@@ -799,34 +799,59 @@ body {
     height: 100%; }
 
 /* line 32, views/app.scss */
+.has-hidden-filters .overlay--content {
+  left: 0; }
+
+/* line 36, views/app.scss */
 .controls {
   position: absolute;
-  top: 0; }
+  top: 0;
+  left: 127px; }
 
-/* line 37, views/app.scss */
+/* line 42, views/app.scss */
+.has-hidden-filters .controls {
+  left: 0; }
+
+/* line 46, views/app.scss */
 .controls__filters {
   display: block;
-  width: 10px;
-  height: 10px; }
+  width: 30px;
+  height: 30px;
+  color: white;
+  line-height: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  background: rgba(216, 214, 215, 0.75);
+  text-align: center; }
+  /* line 57, views/app.scss */
+  .controls__filters:after {
+    position: relative;
+    display: block;
+    width: 30px;
+    height: 30px;
+    content: "\2192"; }
+  /* line 64, views/app.scss */
+  .controls__filters.is-open:after {
+    content: "\2190"; }
 
 /* Let's get this party started */
-/* line 44, views/app.scss */
+/* line 70, views/app.scss */
 ::-webkit-scrollbar {
   width: 6px;
   opacity: 0.5; }
 
 /* Track */
-/* line 50, views/app.scss */
+/* line 76, views/app.scss */
 ::-webkit-scrollbar-track {
   height: 95%;
   padding: 10px 0; }
 
 /* Handle */
-/* line 57, views/app.scss */
+/* line 83, views/app.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 0, 0, 0.8); }
 
-/* line 62, views/app.scss */
+/* line 88, views/app.scss */
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4); }
 
@@ -845,14 +870,16 @@ body {
 #content {
   pointer-events: none;
   background-color: rgba(216, 214, 215, 0.75);
-  height: 100%; }
+  height: 100%;
+  position: relative;
+  left: 0; }
 
-/* line 11, views/content.scss */
+/* line 13, views/content.scss */
 .content__items {
   padding: 70px 8px 0 0;
   width: 296px; }
 
-/* line 16, views/content.scss */
+/* line 18, views/content.scss */
 .content-item {
   width: 140px;
   background: white;
@@ -865,18 +892,18 @@ body {
   float: left;
   opacity: 0.55; }
 
-/* line 25, views/content.scss */
+/* line 27, views/content.scss */
 .content-item.is-focussed {
   opacity: 1; }
 
-/* line 30, views/content.scss */
+/* line 32, views/content.scss */
 .content-item__image {
   min-height: 140px;
   position: relative; }
-  /* line 33, views/content.scss */
+  /* line 35, views/content.scss */
   .content-item__image img {
     visibility: hidden; }
-  /* line 36, views/content.scss */
+  /* line 38, views/content.scss */
   .content-item__image .replacement {
     -webkit-border-radius: 3px 3px 0 0;
     -ms-border-radius: 3px 3px 0 0;
@@ -889,13 +916,13 @@ body {
     height: 100%;
     background-size: 100% 100%; }
 
-/* line 48, views/content.scss */
+/* line 50, views/content.scss */
 .lt-ie9 .content-item__image {
   position: static; }
-  /* line 50, views/content.scss */
+  /* line 52, views/content.scss */
   .lt-ie9 .content-item__image img {
     visibility: visible; }
-/* line 54, views/content.scss */
+/* line 56, views/content.scss */
 .lt-ie9 .replacement {
   display: none; }
 
@@ -910,18 +937,22 @@ body {
   float: left; }
 
 /* line 15, views/filters.scss */
+.has-hidden-filters .filters-panel {
+  left: -127px; }
+
+/* line 19, views/filters.scss */
 .filters-panel__filter--twocols {
   padding-left: 8px; }
-  /* line 19, views/filters.scss */
+  /* line 23, views/filters.scss */
   .filters-panel__filter--twocols .filter__country {
     width: 50%;
     float: left; }
-  /* line 25, views/filters.scss */
+  /* line 29, views/filters.scss */
   .filters-panel__filter--twocols .filter__country.is-odd {
     margin-left: -8px;
     margin-right: 8px; }
 
-/* line 34, views/filters.scss */
+/* line 38, views/filters.scss */
 .filter {
   display: block;
   color: white;
@@ -933,11 +964,11 @@ body {
   background: black;
   padding: 3px 0; }
 
-/* line 51, views/filters.scss */
+/* line 55, views/filters.scss */
 .filter__type.is-selected,
 .filter__country.is-selected {
   background-color: #f72a34; }
 
-/* line 55, views/filters.scss */
+/* line 59, views/filters.scss */
 .filter__country:last-child {
   margin-bottom: 6px; }

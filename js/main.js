@@ -65,7 +65,7 @@ var app = (function(){
             // Set current or remove current.
             currentcountryfilter = togglingOff === true ? "" : countryfilter;
 
-            console.log("Filter", countryfilter);
+            // console.log("Filter", countryfilter);
 
             models.each(function(item){
                 loc = item.getlocation();
@@ -85,10 +85,10 @@ var app = (function(){
 
             if( currenttype === "studio" ){
                 // scale to fit all markers.
-                if( togglingoff === true ){
-                    map.fitworld();
+                if( togglingOff === true ){
+                    map.fitWorld();
                 } else {
-                    map.fitbounds(bounds, { maxzoom : 17 });
+                    map.fitBounds(bounds, { maxZoom : 17 });
                 }
             }
 
@@ -124,7 +124,7 @@ var app = (function(){
             });
 
             if( currenttype === "showcase" ){
-                map.fitBounds(bounds, { maxzoom : 17 });
+                map.fitBounds(bounds, { maxzoom : 12 });
             } else {
                 // TODO - Determine whether we want to do this 
                 // for studio. Speak to X,F & D.
@@ -159,12 +159,7 @@ var app = (function(){
             });
 
             map.on("moveend", pinsWithinBounds);
-            map.on("click", mapclickhandler, this );
 
-        },
-
-        mapclickhandler = function(){
-            console.log("maplclickhandler");
         },
 
         renderPins = function(){
@@ -237,10 +232,8 @@ var app = (function(){
 
                 isWithinBounds = currbounds.contains(L.latLng(loc.latitude, loc.longitude));
                 if( currzoom >= 7 && isWithinBounds ){
-                    // console.log("In viewport");
                     item.set("inviewport", true);
                 } else {
-                    // console.log("Not in viewport");
                     item.set("inviewport", false);
                 }
 

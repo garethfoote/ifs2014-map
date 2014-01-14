@@ -6,6 +6,8 @@ $item-border-radius: 3px;
     pointer-events:none;
     background-color: $colour-panelbg;
     height: 100%;
+    position: relative;
+    left: 0;
 }
 
 .content__items {

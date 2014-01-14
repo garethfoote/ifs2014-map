@@ -106,8 +106,11 @@ var PinView = Backbone.View.extend({
 
 var ContentView = Backbone.View.extend({
     el : $("#content"),
+    $contentcontainer : {},
     $contentitems : {},
     children : {},
+    timekeys : [],
+    timemap  : {},
 
     initialize : function(){
 
@@ -115,7 +118,8 @@ var ContentView = Backbone.View.extend({
         this.collection.on("change:isfiltered-country", this.filteredHandler, this);
         this.collection.on("change:isfiltered-type", this.filteredHandler, this);
 
-        this.$contentitems = this.$(".content__items");
+        this.$contentcontainer = this.$(".content__items");
+        this.$contentitems = this.$(".content-item");
 
     },
 
@@ -131,51 +135,76 @@ var ContentView = Backbone.View.extend({
 
     },
 
-    updateSortMap : function(){
+    getPosition : function( created ){
 
+        this.timekeys.push( created );
+        this.timekeys.sort();
+        this.timekeys.reverse();
 
-
+        return this.timekeys.indexOf( created );
 
     },
 
     addone : function( contentitem ){
 
-        var id = contentitem.get("id");
+        var id = contentitem.get("id"),
+            created = contentitem.get("created_time"),
+            domindex;
 
         if( !(id in this.children) && contentitem.get("removed") === false ){
 
+            domindex = this.getPosition( created );
+
             // Add.
-            console.log("Add", id);
+            // console.log("Add", id);
 
             var view = new ItemView({ model: contentitem });
-            // TODO - Add in order.
-            this.$contentitems.append( view.render().$el );
+            if( domindex === 0 ){
+                this.$contentcontainer.prepend(view.render().$el);
+            } else {
+                this.$contentitems.eq(domindex-1).after(view.render().$el);
+            }
 
             // Cache for removal
             this.children[id] = view;
 
+
         } else if( contentitem.get("removed") === true ){
 
+            domindex = this.getPosition( created );
+
             // Re-add.
-            this.$(".content__items").append( this.children[id].$el );
-            console.log("Re-add", id);
+            if( domindex === 0 ){
+                this.$contentcontainer.prepend(this.children[id].$el);
+            } else {
+                this.$contentitems.eq(domindex-1).after(this.children[id].$el);
+            }
+            // console.log("Re-add", id);
             this.children[id].delegateEvents();
 
         } else {
-            console.log("Already added", id);
+            // console.log("Already added", id);
         }
+
+        // Recache content-items.
+        this.$contentitems = this.$(".content-item");
 
     },
 
     removeone : function( contentitem ){
 
-        var id = contentitem.get("id");
+        var id = contentitem.get("id"),
+            created = contentitem.get("created_time");
 
         if( id in this.children ){
 
             this.children[id].remove();
             contentitem.set("removed", true);
 
+            // Remove for sorting.
+            this.timekeys.splice( this.timekeys.indexOf(created), 1 );
+            // Recache content-items.
+            this.$contentitems = this.$(".content-item");
         }
 
     }
@@ -289,13 +318,9 @@ var FilterPanelView = Backbone.View.extend({
 
     togglepanel : function(){
 
-        if( this.$el.hasClass("is-open") ){
-            this.$el.removeClass("is-open");
-            this.$el.css("left", "-100%");
-        } else {
-            this.$el.addClass("is-open");
-            this.$el.css("left", "0");
-        }
+        var $app = $("#app"), $ctrl = $(".controls__filters");
+        $app.toggleClass("has-hidden-filters");
+        $ctrl.toggleClass("is-open");
 
     }
 
