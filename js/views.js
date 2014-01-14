@@ -19,8 +19,8 @@ var PinView = Backbone.View.extend({
 
         if( this.model.get("type") == "showcase" ){
             icon = L.icon({
-                    iconUrl: '/img/marker_grey.png',
-                    shadowUrl: '/img/marker_shadow.png',
+                    iconUrl: 'img/marker_grey.png',
+                    shadowUrl: 'img/marker_shadow.png',
 
                     iconSize:     [50, 81],
                     shadowSize:   [78, 58],
@@ -30,8 +30,8 @@ var PinView = Backbone.View.extend({
            });
         } else {
             icon = L.icon({
-                    iconUrl: '/img/marker_red.png',
-                    shadowUrl: '/img/marker_shadow.png',
+                    iconUrl: 'img/marker_red.png',
+                    shadowUrl: 'img/marker_shadow.png',
 
                     //iconSize:     [widthPin, widthPin*ratioPin],
                     // shadowSize:   [widthShadow, widthShadow*ratioShadow],
