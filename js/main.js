@@ -268,9 +268,8 @@ window.onload = function(){
     xhr.onload = function(){
         app.handleData(JSON.parse(this.responseText));
     };
-    // xhr.open("GET", "http://mysterious-crag-7636.herokuapp.com/output.json", false);
-    xhr.open("GET", "http://localhost:5000/output.json", false);
+
+    xhr.open("GET", "http://mysterious-crag-7636.herokuapp.com/output.json", false);
+    // xhr.open("GET", "http://localhost:5000/output.json", false);
     // xhr.open("GET", "data/output001.json", false);
     xhr.send();
-
-};
