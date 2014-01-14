@@ -43,14 +43,14 @@ var app = (function(){
 
         init = function(){
 
-            map = L.map('map', { zoomControl : false })
-                   .setView([25, -4], 3);
+            var options = {
+                zoomControl : false,
+                maxZoom : 25, 
+                minZoom : 2
+            };
 
-            // L.tileLayer("http://api.tiles.mapbox.com/v3/danielc-s.gn7b251h.json", {
-            L.tileLayer("http://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                            attribution: attribution,
-                            maxZoom: 25, minZoom: 2
-                        }).addTo(map);
+            map = L.mapbox.map('map', 'danielc-s.gn7b251h', options)
+                   .setView([25, -4], 3);
 
             L.control.zoom({ position : "topright" }).addTo(map);
 

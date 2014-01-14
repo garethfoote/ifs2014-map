@@ -5,7 +5,6 @@ var PinView = Backbone.View.extend({
 
     initialize : function(){
 
-        // this.model.on("change:inviewport", this.filter, this);
         this.model.on("change:isfiltered-country", this.filter, this);
         this.model.on("change:isfiltered-type", this.filter, this);
 
@@ -13,14 +12,35 @@ var PinView = Backbone.View.extend({
 
     render : function( map ){
 
-        var marker;
+        var icon, ratioPin = 161/100, ratioShadow = 116/156,
+            widthPin = 50, widthShadow = 78;
 
         this.map = map;
 
         if( this.model.get("type") == "showcase" ){
-            marker = { icon : L.divIcon({className: 'showcase-marker'}) };
+            icon = L.icon({
+                    iconUrl: '/img/marker_grey.png',
+                    shadowUrl: '/img/marker_shadow.png',
+
+                    iconSize:     [50, 81],
+                    shadowSize:   [78, 58],
+                    iconAnchor:   [25, 66],
+                    shadowAnchor: [39, 29],
+                    popupAnchor:  [0, -50]
+           });
         } else {
-            // marker = { icon : L.Icon.Default };
+            icon = L.icon({
+                    iconUrl: '/img/marker_red.png',
+                    shadowUrl: '/img/marker_shadow.png',
+
+                    //iconSize:     [widthPin, widthPin*ratioPin],
+                    // shadowSize:   [widthShadow, widthShadow*ratioShadow],
+                    iconSize:     [50, 81],
+                    shadowSize:   [78, 58],
+                    iconAnchor:   [25, 66],
+                    shadowAnchor: [39, 29],
+                    popupAnchor:  [0, -50]
+            });
         }
 
         // Get location. Either content or home.
@@ -28,7 +48,7 @@ var PinView = Backbone.View.extend({
                         ? this.model.get("home") : this.model.get("location"),
             tplhtml = _.template($("#ifstpl__popup").html(), this.model.attributes);
 
-        this.layer = L.marker([loc.latitude, loc.longitude], marker);
+        this.layer = L.marker([loc.latitude, loc.longitude], { icon : icon });
         // Popup.
         this.layer.bindPopup(tplhtml).openPopup();
         this.layer.on("popupopen", this.popupopenhandler, this);
@@ -327,6 +347,7 @@ var FilterPanelView = Backbone.View.extend({
 });
 
 var CountryFilterView = Backbone.View.extend({
+
 
     template: _.template( $('#ifstpl__filter-country').html() ),
     tagName: "a",
