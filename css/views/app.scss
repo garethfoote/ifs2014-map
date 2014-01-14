@@ -46,23 +46,24 @@ body {
 .controls__filters {
     $size: 30px;
     display: block;
-    width: $size;
+    width: auto;
     height: $size;
     color: white;
     line-height: $size;
-    font-size: 20px;
     font-weight: bold;
     background: $colour-panelbg;
     text-align: center;
     &:after {
         position: relative;
         display: block;
-        width: $size;
+        width: auto;
         height: $size;
-        content: "\2192";
+        font-size: 14px;
+        padding: 0 5px;
+        content: "\2192 Show Filters";
     }
     &.is-open:after {
-        content: "\2190";
+        content: "\2190 Hide Filters";
     }
 }
 

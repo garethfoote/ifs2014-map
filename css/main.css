@@ -815,43 +815,44 @@ body {
 /* line 46, views/app.scss */
 .controls__filters {
   display: block;
-  width: 30px;
+  width: auto;
   height: 30px;
   color: white;
   line-height: 30px;
-  font-size: 20px;
   font-weight: bold;
   background: rgba(216, 214, 215, 0.75);
   text-align: center; }
-  /* line 57, views/app.scss */
+  /* line 56, views/app.scss */
   .controls__filters:after {
     position: relative;
     display: block;
-    width: 30px;
+    width: auto;
     height: 30px;
-    content: "\2192"; }
-  /* line 64, views/app.scss */
+    font-size: 14px;
+    padding: 0 5px;
+    content: "\2192 Show Filters"; }
+  /* line 65, views/app.scss */
   .controls__filters.is-open:after {
-    content: "\2190"; }
+    content: "\2190 Hide Filters"; }
 
 /* Let's get this party started */
-/* line 70, views/app.scss */
+/* line 71, views/app.scss */
 ::-webkit-scrollbar {
   width: 6px;
   opacity: 0.5; }
 
 /* Track */
-/* line 76, views/app.scss */
+/* line 77, views/app.scss */
 ::-webkit-scrollbar-track {
   height: 95%;
   padding: 10px 0; }
 
 /* Handle */
-/* line 83, views/app.scss */
+/* line 84, views/app.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 0, 0, 0.8); }
 
-/* line 88, views/app.scss */
+/* line 89, views/app.scss */
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4); }
 
