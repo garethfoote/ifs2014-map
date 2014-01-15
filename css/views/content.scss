@@ -1,4 +1,4 @@
-$item-width: 140px;
+$item-width: 170px;
 $item-border: 8px;
 $item-border-radius: 3px;
 
@@ -16,12 +16,53 @@ $item-border-radius: 3px;
 }
 
 .content-item {
-    width:  140px;
+    width:  $item-width;
     background: white;
     @include vendor-prefix(border-radius, $item-border-radius);
     margin: 0 0 $item-border $item-border;
     float: left;
     opacity: 0.55;
+}
+
+.content-item__box {
+    padding: 7px;
+    border-bottom: solid 1px #ececec;
+}
+
+.content-item__user {
+    height: 30px;
+}
+
+.content-item__profile {
+    width: auto;
+    height: 100%;
+    float: left;
+}
+
+.content-item__user-info {
+    float: left;
+    margin-left: 4px;
+    color: $colour-content-info;
+}
+
+.content-item__custom-tags {
+    list-style:none;
+    margin: 0;
+    padding: 0;
+    color: $colour-content-customtags;
+    li {
+        display: inline-block;
+        margin-left : 3px;
+        &:after {
+            position : relative;
+            left : 1px;
+            content : "/";
+            height: 75%;
+        }
+        &:last-child:after {
+            content: ""
+        }
+    }
 }
 
 .content-item.is-focussed {
@@ -30,7 +71,7 @@ $item-border-radius: 3px;
 }
 
 .content-item__image {
-    min-height: 140px;
+    min-height: $item-width;
     position: relative;
     img {
         visibility: hidden;

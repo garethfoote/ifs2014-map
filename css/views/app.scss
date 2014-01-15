@@ -1,11 +1,11 @@
-body {
+html, body {
     overflow: hidden;
+    height: 100%;
 }
 
 #app {
     width: 100%;
     height: 100%;
-    position: absolute;
 }
 
 .app.s_976 {
@@ -65,6 +65,14 @@ body {
     &.is-open:after {
         content: "\2190 Hide Filters";
     }
+}
+
+
+.fullscreen {
+    position: absolute;
+    left: 100%;
+    top: 100%;
+    margin: -30px 0 0 -100px;
 }
 
 /* Let's get this party started */

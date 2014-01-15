@@ -125,12 +125,14 @@ var PinView = Backbone.View.extend({
 });
 
 var ContentView = Backbone.View.extend({
+
     el : $("#content"),
     $contentcontainer : {},
     $contentitems : {},
     children : {},
     timekeys : [],
     timemap  : {},
+    packery : {},
 
     initialize : function(){
 
@@ -141,11 +143,36 @@ var ContentView = Backbone.View.extend({
         this.$contentcontainer = this.$(".content__items");
         this.$contentitems = this.$(".content-item");
 
+        this.packery = new Packery( this.$contentcontainer.get(0), {
+                itemSelector: '.content-item',
+                transitionDuration: "0s"
+        });
+
+    },
+
+    layout : function( numitems ){
+
+        var self = this;
+        /*
+        // console.log(this.$contentitems.length );
+        // this.packery.appended( self.$contentitems.get() );
+        if( this.$contentitems.length == 0 ){
+            this.packery.destroy();
+            this.packery = new Packery( this.$contentcontainer.get(0), {
+                itemSelector: '.content-item',
+                transitionDuration: "0s"
+            });
+            return;
+        }
+
+        this.packery.layout();
+        */
+
     },
 
     filteredHandler : function(item){
 
-        if( item.get("inviewport") === true
+       if( item.get("inviewport") === true
             && item.get("isfiltered-country") === false
             && item.get("isfiltered-type") === false ){
             this.addone( item );
@@ -188,6 +215,7 @@ var ContentView = Backbone.View.extend({
             // Cache for removal
             this.children[id] = view;
 
+            // this.packery.addItems(view.$el.get(0));
 
         } else if( contentitem.get("removed") === true ){
 
@@ -201,6 +229,8 @@ var ContentView = Backbone.View.extend({
             }
             // console.log("Re-add", id);
             this.children[id].delegateEvents();
+
+            // this.packery.addItems(this.children[id].$el.get(0));
 
         } else {
             // console.log("Already added", id);
@@ -225,6 +255,8 @@ var ContentView = Backbone.View.extend({
             this.timekeys.splice( this.timekeys.indexOf(created), 1 );
             // Recache content-items.
             this.$contentitems = this.$(".content-item");
+
+            // this.packery.remove(this.children[id].$el.get(0));
         }
 
     }
@@ -258,6 +290,16 @@ var ItemView = Backbone.View.extend({
     },
 
     render : function(){
+
+        // If no custom caption. Avoids error in templating.
+        if(!_.has(this.model.attributes, "custom_caption")){
+            this.model.set("custom_caption", "No caption.");
+        }
+
+        // If no custom tags. Avoids error in templating.
+        if(!_.has(this.model.attributes, "custom_tags") || _.isNull(this.model.get("custom_tags"))) {
+            this.model.set("custom_tags", []);
+        }
 
         // Render template.
         this.$el.html(this.template(this.model.attributes));

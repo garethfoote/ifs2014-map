@@ -38,6 +38,7 @@ var app = (function(){
         currenttype = "studio";
         filterview = {};
         currentcountryfilter = "",
+        numbercontent = 0,
         attribution = 'Map data &copy; '
                 +' <a href="http://openstreetmap.org/">OpenStreetMap</a> contributors',
 
@@ -54,6 +55,46 @@ var app = (function(){
 
             L.control.zoom({ position : "topright" }).addTo(map);
 
+            $(".fullscreen").on("click", function(){
+                togglefullscreen(document.getElementById("app"));
+            });
+
+        },
+
+        togglefullscreen = function(elem){
+
+            if (!window.screenTop && !window.screenY) {
+                cancelfullscreen(elem);
+            } else {
+                requestfullscreen(elem);
+            }
+
+        },
+
+        cancelfullscreen = function(el) {
+
+            var element = document;
+            // Supports most browsers and their versions.
+            var requestMethod = element.exitFullScreen || element.cancelFullScreen || element.webkitCancelFullScreen || element.mozCancelFullScreen || element.msExitFullScreen;
+            console.log(requestMethod);
+
+            if (requestMethod) {
+                requestMethod.call(element);
+            }
+        },
+
+        requestfullscreen = function(element, requestMethod) {
+            // Supports most browsers and their versions.
+            var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+            if (requestMethod) { // Native full screen.
+                requestMethod.call(element);
+            } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+                var wscript = new ActiveXObject("WScript.Shell");
+                if (wscript !== null) {
+                    wscript.SendKeys("{F11}");
+                }
+            }
         },
 
         filterCountry = function( countryfilter ){
@@ -61,6 +102,8 @@ var app = (function(){
             var i = 0,
                 togglingOff = ( currentcountryfilter === countryfilter ),
                 bounds = [], activeType = false, loc = {};
+
+            numbercontent = 0;
 
             // Set current or remove current.
             currentcountryfilter = togglingOff === true ? "" : countryfilter;
@@ -77,10 +120,11 @@ var app = (function(){
                         item.set("isfiltered-country", true);
                     } else {
                         item.set("isfiltered-country", false);
-                        bounds.push([loc.latitude, loc.longitude]);
+                        if( item.get("isfiltered-type") === false ){
+                            bounds.push([loc.latitude, loc.longitude]);
+                        }
                     }
                 }
-
             });
 
             if( currenttype === "studio" ){
@@ -91,6 +135,8 @@ var app = (function(){
                     map.fitBounds(bounds, { maxZoom : 17 });
                 }
             }
+
+            contentview.layout();
 
         },
 
@@ -131,6 +177,8 @@ var app = (function(){
                 // map.fitbounds(bounds, { maxzoom : 17 });
             }
 
+            contentview.layout();
+
         },
 
         handleData = function( data ){
@@ -160,6 +208,24 @@ var app = (function(){
 
             map.on("moveend", pinsWithinBounds);
 
+            /*
+            models.on("change:inviewport", calcamountcontent, this);
+            models.on("change:isfiltered-country", calcamountcontent, this);
+            models.on("change:isfiltered-type", calcamountcontent, this);
+            */
+
+        },
+
+        calcamountcontent = function(item){
+
+            if( item.get("inviewport") === true
+                    && item.get("isfiltered-country") === false
+                    && item.get("isfiltered-type") === false ){
+                        numbercontent++;
+                    }
+
+            console.log(numbercontent);
+
         },
 
         renderPins = function(){
@@ -169,15 +235,23 @@ var app = (function(){
 
             models.each(function(item){
 
-                var type = "";
+                var type = "",
+                    customtags = item.get("custom_tags"),
+                    removeindex = -1;
 
-                if( _.contains(item.get("custom_tags"), "showcase") ){
+                if( _.contains(customtags, "showcase") ){
                     item.set("type", "showcase");
                 } else {
                     item.set("type", "studio");
                 }
 
                 type = item.get("type");
+                removeindex = (customtags)?customtags.indexOf(type):-1;
+                if( removeindex >= 0 ){
+                    customtags.splice(removeindex, 1);
+                    item.set("custom_tags", customtags);
+                }
+
                 loc = item.getlocation();
 
                 // If other pin exists here then just append model.
@@ -190,9 +264,12 @@ var app = (function(){
                     map.addLayer( pin.layer );
                     pins[type][loc.latitude+""+loc.longitude] = pin;
                 }
+
             });
 
             filterType();
+
+
 
         },
 
@@ -239,6 +316,8 @@ var app = (function(){
 
             });
 
+            contentview.layout();
+
         };
 
     return {
@@ -262,8 +341,8 @@ window.onload = function(){
         app.handleData(JSON.parse(this.responseText));
     };
 
-    xhr.open("GET", "http://mysterious-crag-7636.herokuapp.com/output.json", false);
-    // xhr.open("GET", "http://localhost:5000/output.json", false);
+    // xhr.open("GET", "http://mysterious-crag-7636.herokuapp.com/output.json", false);
+    xhr.open("GET", "http://localhost:5000/output.json", false);
     // xhr.open("GET", "data/output001.json", false);
     xhr.send();
 

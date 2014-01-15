@@ -15,6 +15,7 @@
 
         <script src="js/vendor/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src='js/vendor/mapbox/mapbox.js'></script>
+        <script src='js/vendor/packery/packery.pkgd.min.js'></script>
         <script src="js/vendor/zepto/zepto.min.js"></script>
         <script src="js/vendor/lodash/lodash.min.js"></script>
         <script src="js/vendor/backbone/backbone-min.js"></script>
@@ -60,6 +61,7 @@
             <div class="controls">
                 <a class="controls__filters is-open" href=""></a>
             </div>
+            <div class="fullscreen">Fullscreen</div>
         </div>
 
         <script id="ifstpl__popup" type="text/template">
@@ -84,7 +86,20 @@
                 <div style="background-image: url('<%= images.low_resolution.url %>');"
                     class="replacement"></div>
             </div>
-            <span class="content-item__author"><%= user.full_name %></span>
+            <div class="content-item__box">
+                <% if(caption && caption.text) { %><%= caption.text %><% } else { %><%= custom_caption %> <% } %>
+            </div>
+            <div class="content-item__box content-item__user">
+                <a href="">
+                    <img title="{{user.username}} Profile Picture" class="content-item__profile" src="<%= user.profile_picture %>" />
+                </a>
+                <div class="content-item__user-info">
+                    <span class="content-item__name"><%= user.full_name %></span><br/>
+                    <ul class="content-item__custom-tags">
+                    <% _.forEach(custom_tags, function(tag) { %><li><%- tag %></li><% }); %>
+                    </ul>
+                </div>
+            </div>
 
         </script>
 
