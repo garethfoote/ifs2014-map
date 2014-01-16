@@ -1,0 +1,11 @@
+{
+    "Bahrain" : { "shortcode" : "BHR" },
+    "Bolivia" : { "shortcode" : "BOL" },
+    "Austria" : { "shortcode" : "AUT" },
+    "Australia" : { "shortcode" : "AUS" },
+    "Portugal" : { "shortcode" : "POR" },
+    "China" : { "shortcode" : "CHN" },
+    "Denmark" : { "shortcode" : "DEN" },
+    "Estonia" : { "shortcode" : "EST" },
+    "Japan" : { "shortcode" : "JPN" }
+}

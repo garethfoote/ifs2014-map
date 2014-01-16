@@ -50,7 +50,7 @@ var app = (function(){
                 minZoom : 2
             };
 
-            map = L.mapbox.map('map', 'danielc-s.gn7b251h', options)
+            map = L.mapbox.map('map', 'danielc-s.h0hhc1fe', options)
                    .setView([25, -4], 3);
 
             L.control.zoom({ position : "topright" }).addTo(map);
@@ -181,11 +181,37 @@ var app = (function(){
 
         },
 
-        handleData = function( data ){
+        handleVenueData = function( data ){
+
+
+            map.markerLayer.on('layeradd', function(e) {
+                    var marker = e.layer,
+                        feature = marker.feature;
+
+                // Create custom popup content
+                var desc = feature.properties.description || "",
+                    popupContent =  "<div>"+desc+"</div>";
+
+                // http://leafletjs.com/reference.html#popup
+                marker.bindPopup(popupContent,{
+                    closeButton: false,
+                    minWidth: 320
+                });
+            });
+            L.mapbox.featureLayer(data.features).addTo(map);
+
+            // L.geoJson( data.features ).addTo(map);
+
+        },
+
+        handleData = function( contentdata, countrymap ){
+
 
             // Loop all items.
-            for (var i = 0; i < data.length; i++) {
-                models.add(data[i]);
+            for (var i = 0; i < contentdata.length; i++) {
+                contentdata[i].shortcode = ( _.has(countrymap, contentdata[i].country))
+                        ? countrymap[contentdata[i].country].shortcode : "";
+                models.add(contentdata[i]);
             }
 
             // Init main content Backbone views.
@@ -207,12 +233,6 @@ var app = (function(){
             });
 
             map.on("moveend", pinsWithinBounds);
-
-            /*
-            models.on("change:inviewport", calcamountcontent, this);
-            models.on("change:isfiltered-country", calcamountcontent, this);
-            models.on("change:isfiltered-type", calcamountcontent, this);
-            */
 
         },
 
@@ -284,16 +304,16 @@ var app = (function(){
             });
             */
 
-            var countries = [];
+            var countries = {};
             models.each(function(item){
                 var c = item.get("country");
-                if( countries.indexOf(c) < 0 ){
-                    countries.push(c);
+                if( !(c in countries) ){
+                    countries[c] = item;
                 }
             });
 
-            for (var i = 0; i < countries.length; i++) {
-                filterview.addone( countries[i] );
+            for (var c in countries) {
+                filterview.addone( countries[c] );
             }
 
         },
@@ -323,7 +343,8 @@ var app = (function(){
     return {
 
         init : init,
-        handleData : handleData
+        handleData : handleData,
+        handleVenueData : handleVenueData
 
     };
 
@@ -336,14 +357,34 @@ window.onload = function(){
     // Set underscore templateing to handlebar style.
     app.init();
 
-    var xhr=new XMLHttpRequest();
-    xhr.onload = function(){
-        app.handleData(JSON.parse(this.responseText));
-    };
+    var venuesdataurl = "data/markers.json",
+        dataurl = "http://localhost:5000/output.json",
+        countrydataurl = "data/countrymap.json",
+        iscountrydataloaded = false, iscontentdataloaded = false,
+        loadeddata = { content : {}, countries : {} };
+
+    $.getJSON( dataurl, function( data ) {
+        iscontentdataloaded = true;
+        loadeddata.content = data;
+        if( iscountrydataloaded === true ){
+            app.handleData( loadeddata.content, loadeddata.countries );
+        }
+    });
+
+    $.getJSON( countrydataurl, function( data ) {
+        iscountrydataloaded = true;
+        loadeddata.countries = data;
+        if( iscontentdataloaded === true ){
+            app.handleData( loadeddata.content, loadeddata.countries );
+        }
+    });
+
+    $.getJSON( venuesdataurl, function( data ) {
+        app.handleVenueData( data );
+    }).error(function(e) { console.log("error", e); });
 
     // xhr.open("GET", "http://mysterious-crag-7636.herokuapp.com/output.json", false);
-    xhr.open("GET", "http://localhost:5000/output.json", false);
+    // xhr.open("GET", "http://localhost:5000/output.json", false);
     // xhr.open("GET", "data/output001.json", false);
-    xhr.send();
 
 };

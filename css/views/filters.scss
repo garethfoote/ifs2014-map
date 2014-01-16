@@ -10,6 +10,8 @@
     // margin: 16px 0  0 percentagewidth(16px, $base-width);
     background: $colour-panelbg;
     // float: left;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 .has-hidden-filters .filters-panel {

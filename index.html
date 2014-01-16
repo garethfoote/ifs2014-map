@@ -12,11 +12,12 @@
 
         <link href='js/vendor/mapbox/mapbox.css' rel='stylesheet' />
         <link href="css/main.css" rel="stylesheet" />
+        <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 
         <script src="js/vendor/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src='js/vendor/mapbox/mapbox.js'></script>
         <script src='js/vendor/packery/packery.pkgd.min.js'></script>
-        <script src="js/vendor/zepto/zepto.min.js"></script>
+        <script src="js/vendor/jquery/jquery-1.10.2.min.js"></script>
         <script src="js/vendor/lodash/lodash.min.js"></script>
         <script src="js/vendor/backbone/backbone-min.js"></script>
 
@@ -60,15 +61,17 @@
             </div>
             <div class="controls">
                 <a class="controls__filters is-open" href=""></a>
+                <div class="controls__filter-info">Filter: <span class="controls__filter-info__country"</span></div>
             </div>
             <div class="fullscreen">Fullscreen</div>
         </div>
 
         <script id="ifstpl__popup" type="text/template">
 
-            <div>
-                <span class="map__popup"><%= country %></span>
-                <span class="map__popup"><%= name %></span>
+            <div class="popup map__popup">
+                <div class="map__popup-title">Designer</div>
+                <span class="map__popup-name"><%= name %></span><br/>
+                <span class="map__popup-country">from <%= country %></span>
             </div>
 
         </script>
@@ -87,7 +90,7 @@
                     class="replacement"></div>
             </div>
             <div class="content-item__box">
-                <% if(caption && caption.text) { %><%= caption.text %><% } else { %><%= custom_caption %> <% } %>
+                <% if(caption && caption.text) { %><%= caption.text+" "+custom_caption %><% } else { %><%= custom_caption %> <% } %>
             </div>
             <div class="content-item__box content-item__user">
                 <a href="">

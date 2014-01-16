@@ -1,3 +1,10 @@
+var pckry;
+
+var MapView = Backbone.View.extend({
+
+
+});
+
 var PinView = Backbone.View.extend({
 
     layer : {},
@@ -17,31 +24,16 @@ var PinView = Backbone.View.extend({
 
         this.map = map;
 
-        if( this.model.get("type") == "showcase" ){
-            icon = L.icon({
-                    iconUrl: 'img/marker_grey.png',
-                    shadowUrl: 'img/marker_shadow.png',
+        icon = L.icon({
+                iconUrl: 'img/marker_red.png',
+                shadowUrl: 'img/marker_shadow.png',
 
-                    iconSize:     [50, 81],
-                    shadowSize:   [78, 58],
-                    iconAnchor:   [25, 66],
-                    shadowAnchor: [39, 29],
-                    popupAnchor:  [0, -50]
-           });
-        } else {
-            icon = L.icon({
-                    iconUrl: 'img/marker_red.png',
-                    shadowUrl: 'img/marker_shadow.png',
-
-                    //iconSize:     [widthPin, widthPin*ratioPin],
-                    // shadowSize:   [widthShadow, widthShadow*ratioShadow],
-                    iconSize:     [50, 81],
-                    shadowSize:   [78, 58],
-                    iconAnchor:   [25, 66],
-                    shadowAnchor: [39, 29],
-                    popupAnchor:  [0, -50]
-            });
-        }
+                iconSize:     [25, 40],
+                shadowSize:   [25, 19],
+                iconAnchor:   [12, 34],
+                shadowAnchor: [12, 10],
+                popupAnchor:  [0, -25]
+        });
 
         // Get location. Either content or home.
         var loc = _.isNull(this.model.get("location"))
@@ -132,7 +124,6 @@ var ContentView = Backbone.View.extend({
     children : {},
     timekeys : [],
     timemap  : {},
-    packery : {},
 
     initialize : function(){
 
@@ -143,7 +134,7 @@ var ContentView = Backbone.View.extend({
         this.$contentcontainer = this.$(".content__items");
         this.$contentitems = this.$(".content-item");
 
-        this.packery = new Packery( this.$contentcontainer.get(0), {
+        pckry = new Packery( this.$contentcontainer.get(0), {
                 itemSelector: '.content-item',
                 transitionDuration: "0s"
         });
@@ -154,8 +145,8 @@ var ContentView = Backbone.View.extend({
 
         var self = this;
 
-        this.packery.reloadItems();
-        this.packery.layout();
+        pckry.reloadItems();
+        pckry.layout();
 
         if( this.$contentitems.length > 0 ){
             $(".overlay--content").removeClass("is-empty");
@@ -210,7 +201,7 @@ var ContentView = Backbone.View.extend({
             // Cache for removal
             this.children[id] = view;
 
-            // this.packery.addItems(view.$el.get(0));
+            // pckry.addItems(view.$el.get(0));
 
         } else if( contentitem.get("removed") === true ){
 
@@ -225,7 +216,7 @@ var ContentView = Backbone.View.extend({
             // console.log("Re-add", id);
             this.children[id].delegateEvents();
 
-            // this.packery.addItems(this.children[id].$el.get(0));
+            // pckry.addItems(this.children[id].$el.get(0));
 
         } else {
             // console.log("Already added", id);
@@ -243,7 +234,7 @@ var ContentView = Backbone.View.extend({
 
         if( id in this.children ){
 
-            this.packery.remove(this.children[id].$el.get(0));
+            pckry.remove(this.children[id].$el.get(0));
             this.children[id].remove();
             contentitem.set("removed", true);
 
@@ -277,8 +268,10 @@ var ItemView = Backbone.View.extend({
     focusHandler : function(){
 
         if( this.model.get("focus") === true ){
+            this.$el.parent().addClass("is-focussed");
             this.$el.addClass("is-focussed");
         } else {
+            this.$el.parent().removeClass("is-focussed");
             this.$el.removeClass("is-focussed");
         }
 
@@ -288,7 +281,7 @@ var ItemView = Backbone.View.extend({
 
         // If no custom caption. Avoids error in templating.
         if(!_.has(this.model.attributes, "custom_caption")){
-            this.model.set("custom_caption", "No caption.");
+            this.model.set("custom_caption", "");
         }
 
         // If no custom tags. Avoids error in templating.
@@ -323,6 +316,7 @@ var ItemView = Backbone.View.extend({
 var FilterPanelView = Backbone.View.extend({
 
     el : $(".filters-panel"),
+    $info : $(".controls__filter-info"),
     events : {
         "click .filter__type"    : "toggleType",
         "click .filter__country" : "filterCountry"
@@ -332,9 +326,9 @@ var FilterPanelView = Backbone.View.extend({
 
         var num = this.$(".filter__country-inner").length;
 
-        var view = new CountryFilterView( country );
+        var view = new CountryFilterView( {model:country} );
         this.$(".js-filters-panel-countries")
-            .append( view.render( country, (num%2==0)).$el );
+            .append( view.render( (num%2==0)).$el );
 
     },
 
@@ -345,11 +339,14 @@ var FilterPanelView = Backbone.View.extend({
         if( $el.hasClass("is-selected") ){
             // Deslect active one.
             $el.removeClass("is-selected");
+            this.$info.removeClass("has-filter");
         } else {
             // Deselect all classes.
             this.$(".filter__country").removeClass("is-selected");
             // Add new one.
             $el.addClass("is-selected");
+            $(".controls__filter-info__country", this.$info).html($el.data("country"));
+            this.$info.addClass("has-filter");
         }
 
         this.trigger("filtercountry", $el.data("country"));
@@ -390,12 +387,12 @@ var CountryFilterView = Backbone.View.extend({
     tagName: "a",
     className: "filter filter__country",
 
-    render : function( country, even ){
+    render : function( even ){
 
-        // TODO - Map country full names to country codes.
-        this.$el.html( this.template({ country : country.substr(0,3) }));
+        console.log(this.model);
+        this.$el.html( this.template({ country : this.model.get("shortcode") }));
         this.$el.addClass((!even)?" is-even":" is-odd");
-        this.$el.data("country", country );
+        this.$el.data("country", this.model.get("country") );
 
         return this;
     }

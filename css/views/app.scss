@@ -1,6 +1,7 @@
 html, body {
     overflow: hidden;
     height: 100%;
+    font-family: "Abel", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono", monospace;
 }
 
 #app {
@@ -41,10 +42,33 @@ html, body {
     position: absolute;
     top: 0;
     left: (95+8+8+16)*1px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 .has-hidden-filters .controls {
     left: 0;
+}
+
+.controls__filter-info__country {
+
+}
+
+.controls__filter-info {
+    $size: 30px;
+    display: none;
+    width: auto;
+    height: $size;
+    color: white;
+    line-height: $size;
+    font-weight: bold;
+    background: $colour-panelbg;
+    padding: 0 5px;
+    float: left;
+    border-left: solid 1px $colour-divider;
+    &.has-filter {
+        display: block;
+    }
 }
 
 .controls__filters {
@@ -57,17 +81,18 @@ html, body {
     font-weight: bold;
     background: $colour-panelbg;
     text-align: center;
+    padding: 0 5px;
+    float: left;
     &:after {
         position: relative;
         display: block;
         width: auto;
         height: $size;
         font-size: 14px;
-        padding: 0 5px;
-        content: "\2192 Show";
+        content: "\2192  Show";
     }
     &.is-open:after {
-        content: "\2190 Hide";
+        content: "\2190  Hide";
     }
 }
 
