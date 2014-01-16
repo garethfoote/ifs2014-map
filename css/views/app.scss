@@ -24,8 +24,12 @@ html, body {
 
 .overlay--content {
     left: 127px;
+    background-color: $colour-panelbg;
     .overlay__inner {
         height: 100%;
+    }
+    &.is-empty {
+        width: 0;
     }
 }
 
@@ -60,10 +64,10 @@ html, body {
         height: $size;
         font-size: 14px;
         padding: 0 5px;
-        content: "\2192 Show Filters";
+        content: "\2192 Show";
     }
     &.is-open:after {
-        content: "\2190 Hide Filters";
+        content: "\2190 Hide";
     }
 }
 

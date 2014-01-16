@@ -4,15 +4,22 @@ $item-border-radius: 3px;
 
 #content {
     pointer-events:none;
-    background-color: $colour-panelbg;
-    height: 100%;
-    position: relative;
+    min-height: 100%;
+    // position: relative;
     left: 0;
+    //background-color: $colour-panelbg;
 }
 
 .content__items {
-    padding: 70px $item-border 0 0;
+    padding: 70px 25px 0 0;
     width: ($item-width+$item-border)*2;
+
+    @media (min-width: 941px) {
+        width: ($item-width+$item-border)*3;
+    }
+    @media (max-width: ($item-width+$item-border)*2) {
+        width: ($item-width+$item-border);
+    }
 }
 
 .content-item {

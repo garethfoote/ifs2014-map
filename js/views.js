@@ -153,20 +153,15 @@ var ContentView = Backbone.View.extend({
     layout : function( numitems ){
 
         var self = this;
-        /*
-        // console.log(this.$contentitems.length );
-        // this.packery.appended( self.$contentitems.get() );
-        if( this.$contentitems.length == 0 ){
-            this.packery.destroy();
-            this.packery = new Packery( this.$contentcontainer.get(0), {
-                itemSelector: '.content-item',
-                transitionDuration: "0s"
-            });
-            return;
-        }
 
+        this.packery.reloadItems();
         this.packery.layout();
-        */
+
+        if( this.$contentitems.length > 0 ){
+            $(".overlay--content").removeClass("is-empty");
+        } else {
+            $(".overlay--content").addClass("is-empty");
+        }
 
     },
 
@@ -248,6 +243,7 @@ var ContentView = Backbone.View.extend({
 
         if( id in this.children ){
 
+            this.packery.remove(this.children[id].$el.get(0));
             this.children[id].remove();
             contentitem.set("removed", true);
 
@@ -256,7 +252,6 @@ var ContentView = Backbone.View.extend({
             // Recache content-items.
             this.$contentitems = this.$(".content-item");
 
-            // this.packery.remove(this.children[id].$el.get(0));
         }
 
     }

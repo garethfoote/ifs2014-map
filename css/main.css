@@ -793,26 +793,30 @@ html, body {
 
 /* line 25, views/app.scss */
 .overlay--content {
-  left: 127px; }
-  /* line 27, views/app.scss */
+  left: 127px;
+  background-color: rgba(216, 214, 215, 0.75); }
+  /* line 28, views/app.scss */
   .overlay--content .overlay__inner {
     height: 100%; }
+  /* line 31, views/app.scss */
+  .overlay--content.is-empty {
+    width: 0; }
 
-/* line 32, views/app.scss */
+/* line 36, views/app.scss */
 .has-hidden-filters .overlay--content {
   left: 0; }
 
-/* line 36, views/app.scss */
+/* line 40, views/app.scss */
 .controls {
   position: absolute;
   top: 0;
   left: 127px; }
 
-/* line 42, views/app.scss */
+/* line 46, views/app.scss */
 .has-hidden-filters .controls {
   left: 0; }
 
-/* line 46, views/app.scss */
+/* line 50, views/app.scss */
 .controls__filters {
   display: block;
   width: auto;
@@ -822,7 +826,7 @@ html, body {
   font-weight: bold;
   background: rgba(216, 214, 215, 0.75);
   text-align: center; }
-  /* line 56, views/app.scss */
+  /* line 60, views/app.scss */
   .controls__filters:after {
     position: relative;
     display: block;
@@ -830,12 +834,12 @@ html, body {
     height: 30px;
     font-size: 14px;
     padding: 0 5px;
-    content: "\2192 Show Filters"; }
-  /* line 65, views/app.scss */
+    content: "\2192 Show"; }
+  /* line 69, views/app.scss */
   .controls__filters.is-open:after {
-    content: "\2190 Hide Filters"; }
+    content: "\2190 Hide"; }
 
-/* line 71, views/app.scss */
+/* line 75, views/app.scss */
 .fullscreen {
   position: absolute;
   left: 100%;
@@ -843,23 +847,23 @@ html, body {
   margin: -30px 0 0 -100px; }
 
 /* Let's get this party started */
-/* line 79, views/app.scss */
+/* line 83, views/app.scss */
 ::-webkit-scrollbar {
   width: 6px;
   opacity: 0.5; }
 
 /* Track */
-/* line 85, views/app.scss */
+/* line 89, views/app.scss */
 ::-webkit-scrollbar-track {
   height: 95%;
   padding: 10px 0; }
 
 /* Handle */
-/* line 92, views/app.scss */
+/* line 96, views/app.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 0, 0, 0.8); }
 
-/* line 97, views/app.scss */
+/* line 101, views/app.scss */
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4); }
 
@@ -877,17 +881,23 @@ html, body {
 /* line 5, views/content.scss */
 #content {
   pointer-events: none;
-  background-color: rgba(216, 214, 215, 0.75);
-  height: 100%;
-  position: relative;
+  min-height: 100%;
   left: 0; }
 
 /* line 13, views/content.scss */
 .content__items {
-  padding: 70px 8px 0 0;
+  padding: 70px 25px 0 0;
   width: 356px; }
+  @media (min-width: 941px) {
+    /* line 13, views/content.scss */
+    .content__items {
+      width: 534px; } }
+  @media (max-width: 356px) {
+    /* line 13, views/content.scss */
+    .content__items {
+      width: 178px; } }
 
-/* line 18, views/content.scss */
+/* line 25, views/content.scss */
 .content-item {
   width: 170px;
   background: white;
@@ -900,59 +910,59 @@ html, body {
   float: left;
   opacity: 0.55; }
 
-/* line 27, views/content.scss */
+/* line 34, views/content.scss */
 .content-item__box {
   padding: 7px;
   border-bottom: solid 1px #ececec; }
 
-/* line 32, views/content.scss */
+/* line 39, views/content.scss */
 .content-item__user {
   height: 30px; }
 
-/* line 36, views/content.scss */
+/* line 43, views/content.scss */
 .content-item__profile {
   width: auto;
   height: 100%;
   float: left; }
 
-/* line 42, views/content.scss */
+/* line 49, views/content.scss */
 .content-item__user-info {
   float: left;
   margin-left: 4px;
   color: dimgrey; }
 
-/* line 48, views/content.scss */
+/* line 55, views/content.scss */
 .content-item__custom-tags {
   list-style: none;
   margin: 0;
   padding: 0;
   color: #bbbbbb; }
-  /* line 53, views/content.scss */
+  /* line 60, views/content.scss */
   .content-item__custom-tags li {
     display: inline-block;
     margin-left: 3px; }
-    /* line 56, views/content.scss */
+    /* line 63, views/content.scss */
     .content-item__custom-tags li:after {
       position: relative;
       left: 1px;
       content: "/";
       height: 75%; }
-    /* line 62, views/content.scss */
+    /* line 69, views/content.scss */
     .content-item__custom-tags li:last-child:after {
       content: ""; }
 
-/* line 68, views/content.scss */
+/* line 75, views/content.scss */
 .content-item.is-focussed {
   opacity: 1; }
 
-/* line 73, views/content.scss */
+/* line 80, views/content.scss */
 .content-item__image {
   min-height: 170px;
   position: relative; }
-  /* line 76, views/content.scss */
+  /* line 83, views/content.scss */
   .content-item__image img {
     visibility: hidden; }
-  /* line 79, views/content.scss */
+  /* line 86, views/content.scss */
   .content-item__image .replacement {
     -webkit-border-radius: 3px 3px 0 0;
     -ms-border-radius: 3px 3px 0 0;
@@ -965,25 +975,23 @@ html, body {
     height: 100%;
     background-size: 100% 100%; }
 
-/* line 91, views/content.scss */
+/* line 98, views/content.scss */
 .lt-ie9 .content-item__image {
   position: static; }
-  /* line 93, views/content.scss */
+  /* line 100, views/content.scss */
   .lt-ie9 .content-item__image img {
     visibility: visible; }
-/* line 97, views/content.scss */
+/* line 104, views/content.scss */
 .lt-ie9 .replacement {
   display: none; }
 
 /* line 1, views/filters.scss */
 .filters-panel {
-  position: relative;
   height: auto;
   width: 95px;
   padding: 8px 8px 0;
   margin: 0 0  0 16px;
-  background: rgba(216, 214, 215, 0.75);
-  float: left; }
+  background: rgba(216, 214, 215, 0.75); }
 
 /* line 15, views/filters.scss */
 .has-hidden-filters .filters-panel {

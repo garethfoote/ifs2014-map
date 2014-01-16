@@ -1,5 +1,5 @@
 .filters-panel {
-    position: relative;
+    // position: relative;
     // top: 0;
     height: auto;
     // width: percentagewidth(95px, $base-width);
@@ -9,7 +9,7 @@
     margin: 0 0  0 16px;
     // margin: 16px 0  0 percentagewidth(16px, $base-width);
     background: $colour-panelbg;
-    float: left;
+    // float: left;
 }
 
 .has-hidden-filters .filters-panel {
