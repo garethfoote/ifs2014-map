@@ -987,6 +987,7 @@ html, body {
 
 /* line 1, views/filters.scss */
 .filters-panel {
+  position: relative;
   height: auto;
   width: 95px;
   padding: 8px 8px 0;
