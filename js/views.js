@@ -389,7 +389,6 @@ var CountryFilterView = Backbone.View.extend({
 
     render : function( even ){
 
-        console.log(this.model);
         this.$el.html( this.template({ country : this.model.get("shortcode") }));
         this.$el.addClass((!even)?" is-even":" is-odd");
         this.$el.data("country", this.model.get("country") );

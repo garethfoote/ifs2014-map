@@ -824,7 +824,7 @@ html, body {
   display: none;
   width: auto;
   height: 30px;
-  color: white;
+  color: #575555;
   line-height: 30px;
   font-weight: bold;
   background: rgba(216, 214, 215, 0.75);
@@ -840,7 +840,7 @@ html, body {
   display: block;
   width: auto;
   height: 30px;
-  color: white;
+  color: #575555;
   line-height: 30px;
   font-weight: bold;
   background: rgba(216, 214, 215, 0.75);
@@ -917,22 +917,18 @@ html, body {
 .content__items {
   padding: 70px 25px 0 0;
   width: 356px; }
-  @media (min-width: 941px) {
-    /* line 14, views/content.scss */
-    .content__items {
-      width: 534px; } }
   @media (max-width: 356px) {
     /* line 14, views/content.scss */
     .content__items {
       width: 178px; } }
-  /* line 25, views/content.scss */
+  /* line 22, views/content.scss */
   .content__items.is-focussed .content-item {
     opacity: 0.3; }
-    /* line 27, views/content.scss */
+    /* line 24, views/content.scss */
     .content__items.is-focussed .content-item.is-focussed {
       opacity: 1; }
 
-/* line 33, views/content.scss */
+/* line 30, views/content.scss */
 .content-item {
   width: 170px;
   background: white;
@@ -944,55 +940,55 @@ html, body {
   margin: 0 0 8px 8px;
   float: left; }
 
-/* line 41, views/content.scss */
+/* line 38, views/content.scss */
 .content-item__box {
   padding: 7px;
   border-bottom: solid 1px #ececec; }
 
-/* line 46, views/content.scss */
+/* line 43, views/content.scss */
 .content-item__user {
   height: 30px; }
 
-/* line 50, views/content.scss */
+/* line 47, views/content.scss */
 .content-item__profile {
   width: auto;
   height: 100%;
   float: left; }
 
-/* line 56, views/content.scss */
+/* line 53, views/content.scss */
 .content-item__user-info {
   float: left;
   margin-left: 4px;
   color: dimgrey; }
 
-/* line 62, views/content.scss */
+/* line 59, views/content.scss */
 .content-item__custom-tags {
   list-style: none;
   margin: 0;
   padding: 0;
   color: #bbbbbb; }
-  /* line 67, views/content.scss */
+  /* line 64, views/content.scss */
   .content-item__custom-tags li {
     display: inline-block;
     margin-left: 3px; }
-    /* line 70, views/content.scss */
+    /* line 67, views/content.scss */
     .content-item__custom-tags li:after {
       position: relative;
       left: 1px;
       content: "/";
       height: 75%; }
-    /* line 76, views/content.scss */
+    /* line 73, views/content.scss */
     .content-item__custom-tags li:last-child:after {
       content: ""; }
 
-/* line 82, views/content.scss */
+/* line 79, views/content.scss */
 .content-item__image {
   min-height: 170px;
   position: relative; }
-  /* line 85, views/content.scss */
+  /* line 82, views/content.scss */
   .content-item__image img {
     visibility: hidden; }
-  /* line 88, views/content.scss */
+  /* line 85, views/content.scss */
   .content-item__image .replacement {
     -webkit-border-radius: 3px 3px 0 0;
     -ms-border-radius: 3px 3px 0 0;
@@ -1005,13 +1001,13 @@ html, body {
     height: 100%;
     background-size: 100% 100%; }
 
-/* line 100, views/content.scss */
+/* line 97, views/content.scss */
 .lt-ie9 .content-item__image {
   position: static; }
-  /* line 102, views/content.scss */
+  /* line 99, views/content.scss */
   .lt-ie9 .content-item__image img {
     visibility: visible; }
-/* line 106, views/content.scss */
+/* line 103, views/content.scss */
 .lt-ie9 .replacement {
   display: none; }
 

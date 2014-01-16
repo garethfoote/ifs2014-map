@@ -322,13 +322,14 @@ var app = (function(){
 
             var currbounds = map.getBounds(),
                 currzoom = map.getZoom(),
-                i = 0, isWithinBounds = false;
+                i = 0, isWithinBounds = false,
+                zoomLevelThreshold = 5;
 
             models.each(function(item){
                 var loc = item.getlocation();
 
                 isWithinBounds = currbounds.contains(L.latLng(loc.latitude, loc.longitude));
-                if( currzoom >= 7 && isWithinBounds ){
+                if( currzoom >= zoomLevelThreshold && isWithinBounds ){
                     item.set("inviewport", true);
                 } else {
                     item.set("inviewport", false);
