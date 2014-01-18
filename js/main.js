@@ -359,8 +359,8 @@ window.onload = function(){
     app.init();
 
     var venuesdataurl = "data/venuemarkers.json",
-        // dataurl = "http://mysterious-crag-7636.herokuapp.com/output.json",
-        dataurl = "http://localhost:5000/output.json",
+        dataurl = "http://mysterious-crag-7636.herokuapp.com/output.json",
+        // dataurl = "http://localhost:5000/output.json",
         countrydataurl = "data/countrymap.json",
         iscountrydataloaded = false, iscontentdataloaded = false,
         loadeddata = { content : {}, countries : {} };
@@ -389,4 +389,3 @@ window.onload = function(){
     // xhr.open("GET", "http://localhost:5000/output.json", false);
     // xhr.open("GET", "data/output001.json", false);
 
-};
