@@ -854,8 +854,9 @@ html, body {
   background: rgba(216, 214, 215, 0.75);
   text-align: center;
   padding: 0 5px;
-  float: left; }
-  /* line 95, views/app.scss */
+  float: left;
+  border-left: solid 1px #ececec; }
+  /* line 96, views/app.scss */
   .controls__filters:after {
     position: relative;
     display: block;
@@ -863,11 +864,11 @@ html, body {
     height: 30px;
     font-size: 14px;
     content: "\2192  Show"; }
-  /* line 103, views/app.scss */
+  /* line 104, views/app.scss */
   .controls__filters.is-open:after {
     content: "\2190  Hide"; }
 
-/* line 109, views/app.scss */
+/* line 110, views/app.scss */
 .fullscreen {
   position: absolute;
   left: 100%;
@@ -875,23 +876,23 @@ html, body {
   margin: -30px 0 0 -100px; }
 
 /* Let's get this party started */
-/* line 117, views/app.scss */
+/* line 118, views/app.scss */
 ::-webkit-scrollbar {
   width: 6px;
   opacity: 0.5; }
 
 /* Track */
-/* line 123, views/app.scss */
+/* line 124, views/app.scss */
 ::-webkit-scrollbar-track {
   height: 95%;
   padding: 10px 0; }
 
 /* Handle */
-/* line 130, views/app.scss */
+/* line 131, views/app.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 0, 0, 0.8); }
 
-/* line 135, views/app.scss */
+/* line 136, views/app.scss */
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4); }
 
