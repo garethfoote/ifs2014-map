@@ -23,14 +23,17 @@ html, body {
     height: 100%;
 }
 
+.is-empty {
+    .overlay--content {
+        width: 0;
+    }
+}
+
 .overlay--content {
     left: 127px;
     background-color: $colour-panelbg;
     .overlay__inner {
         height: 100%;
-    }
-    &.is-empty {
-        width: 0;
     }
 }
 
@@ -44,21 +47,28 @@ html, body {
     left: (95+8+8+16)*1px;
     font-weight: bold;
     letter-spacing: 2px;
+    width: ($item-width+$item-border)*2;
+
+    @media (max-width: ($item-width+$item-border)*2) {
+        width: ($item-width+$item-border);
+    }
 }
 
 .has-hidden-filters .controls {
     left: 0;
 }
 
-.controls__filter-info__country {
-
+.is-empty {
+    .controls__filter-info--zoom {
+        display: block;
+    }
 }
+
 
 .controls__filter-info {
     $size: 30px;
     display: none;
     width: auto;
-    height: $size;
     color: rgb(87, 85, 85);
     line-height: $size;
     font-weight: bold;
@@ -75,7 +85,6 @@ html, body {
     $size: 30px;
     display: block;
     width: auto;
-    height: $size;
     color: rgb(87, 85, 85);
     line-height: $size;
     font-weight: bold;

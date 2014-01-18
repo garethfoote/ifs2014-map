@@ -792,38 +792,47 @@ html, body {
   overflow-x: hidden;
   height: 100%; }
 
-/* line 26, views/app.scss */
+/* line 27, views/app.scss */
+.is-empty .overlay--content {
+  width: 0; }
+
+/* line 32, views/app.scss */
 .overlay--content {
   left: 127px;
   background-color: rgba(216, 214, 215, 0.75); }
-  /* line 29, views/app.scss */
+  /* line 35, views/app.scss */
   .overlay--content .overlay__inner {
     height: 100%; }
-  /* line 32, views/app.scss */
-  .overlay--content.is-empty {
-    width: 0; }
 
-/* line 37, views/app.scss */
+/* line 40, views/app.scss */
 .has-hidden-filters .overlay--content {
   left: 0; }
 
-/* line 41, views/app.scss */
+/* line 44, views/app.scss */
 .controls {
   position: absolute;
   top: 0;
   left: 127px;
   font-weight: bold;
-  letter-spacing: 2px; }
+  letter-spacing: 2px;
+  width: 356px; }
+  @media (max-width: 356px) {
+    /* line 44, views/app.scss */
+    .controls {
+      width: 178px; } }
 
-/* line 49, views/app.scss */
+/* line 57, views/app.scss */
 .has-hidden-filters .controls {
   left: 0; }
 
-/* line 57, views/app.scss */
+/* line 62, views/app.scss */
+.is-empty .controls__filter-info--zoom {
+  display: block; }
+
+/* line 68, views/app.scss */
 .controls__filter-info {
   display: none;
   width: auto;
-  height: 30px;
   color: #575555;
   line-height: 30px;
   font-weight: bold;
@@ -831,15 +840,14 @@ html, body {
   padding: 0 5px;
   float: left;
   border-left: solid 1px #ececec; }
-  /* line 69, views/app.scss */
+  /* line 79, views/app.scss */
   .controls__filter-info.has-filter {
     display: block; }
 
-/* line 74, views/app.scss */
+/* line 84, views/app.scss */
 .controls__filters {
   display: block;
   width: auto;
-  height: 30px;
   color: #575555;
   line-height: 30px;
   font-weight: bold;
@@ -847,7 +855,7 @@ html, body {
   text-align: center;
   padding: 0 5px;
   float: left; }
-  /* line 86, views/app.scss */
+  /* line 95, views/app.scss */
   .controls__filters:after {
     position: relative;
     display: block;
@@ -855,11 +863,11 @@ html, body {
     height: 30px;
     font-size: 14px;
     content: "\2192  Show"; }
-  /* line 94, views/app.scss */
+  /* line 103, views/app.scss */
   .controls__filters.is-open:after {
     content: "\2190  Hide"; }
 
-/* line 100, views/app.scss */
+/* line 109, views/app.scss */
 .fullscreen {
   position: absolute;
   left: 100%;
@@ -867,23 +875,23 @@ html, body {
   margin: -30px 0 0 -100px; }
 
 /* Let's get this party started */
-/* line 108, views/app.scss */
+/* line 117, views/app.scss */
 ::-webkit-scrollbar {
   width: 6px;
   opacity: 0.5; }
 
 /* Track */
-/* line 114, views/app.scss */
+/* line 123, views/app.scss */
 ::-webkit-scrollbar-track {
   height: 95%;
   padding: 10px 0; }
 
 /* Handle */
-/* line 121, views/app.scss */
+/* line 130, views/app.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 0, 0, 0.8); }
 
-/* line 126, views/app.scss */
+/* line 135, views/app.scss */
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4); }
 
@@ -906,29 +914,29 @@ html, body {
 .map__popup {
   text-align: center; }
 
-/* line 5, views/content.scss */
+/* line 1, views/content.scss */
 #content {
   pointer-events: none;
   min-height: 100%;
   left: 0;
   letter-spacing: 1px; }
 
-/* line 14, views/content.scss */
+/* line 10, views/content.scss */
 .content__items {
   padding: 70px 25px 0 0;
   width: 356px; }
   @media (max-width: 356px) {
-    /* line 14, views/content.scss */
+    /* line 10, views/content.scss */
     .content__items {
       width: 178px; } }
-  /* line 22, views/content.scss */
+  /* line 18, views/content.scss */
   .content__items.is-focussed .content-item {
     opacity: 0.3; }
-    /* line 24, views/content.scss */
+    /* line 20, views/content.scss */
     .content__items.is-focussed .content-item.is-focussed {
       opacity: 1; }
 
-/* line 30, views/content.scss */
+/* line 26, views/content.scss */
 .content-item {
   width: 170px;
   background: white;
@@ -938,57 +946,64 @@ html, body {
   -o-border-radius: 3px;
   border-radius: 3px;
   margin: 0 0 8px 8px;
-  float: left; }
+  float: left;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  /* Non standard for webkit */
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto; }
 
-/* line 38, views/content.scss */
+/* line 41, views/content.scss */
 .content-item__box {
   padding: 7px;
   border-bottom: solid 1px #ececec; }
 
-/* line 43, views/content.scss */
+/* line 46, views/content.scss */
 .content-item__user {
   height: 30px; }
 
-/* line 47, views/content.scss */
+/* line 50, views/content.scss */
 .content-item__profile {
   width: auto;
   height: 100%;
   float: left; }
 
-/* line 53, views/content.scss */
+/* line 56, views/content.scss */
 .content-item__user-info {
   float: left;
   margin-left: 4px;
   color: dimgrey; }
 
-/* line 59, views/content.scss */
+/* line 62, views/content.scss */
 .content-item__custom-tags {
   list-style: none;
   margin: 0;
   padding: 0;
   color: #bbbbbb; }
-  /* line 64, views/content.scss */
+  /* line 67, views/content.scss */
   .content-item__custom-tags li {
     display: inline-block;
     margin-left: 3px; }
-    /* line 67, views/content.scss */
+    /* line 70, views/content.scss */
     .content-item__custom-tags li:after {
       position: relative;
       left: 1px;
       content: "/";
       height: 75%; }
-    /* line 73, views/content.scss */
+    /* line 76, views/content.scss */
     .content-item__custom-tags li:last-child:after {
       content: ""; }
 
-/* line 79, views/content.scss */
+/* line 82, views/content.scss */
 .content-item__image {
   min-height: 170px;
   position: relative; }
-  /* line 82, views/content.scss */
+  /* line 85, views/content.scss */
   .content-item__image img {
     visibility: hidden; }
-  /* line 85, views/content.scss */
+  /* line 88, views/content.scss */
   .content-item__image .replacement {
     -webkit-border-radius: 3px 3px 0 0;
     -ms-border-radius: 3px 3px 0 0;
@@ -1001,13 +1016,13 @@ html, body {
     height: 100%;
     background-size: 100% 100%; }
 
-/* line 97, views/content.scss */
+/* line 100, views/content.scss */
 .lt-ie9 .content-item__image {
   position: static; }
-  /* line 99, views/content.scss */
+  /* line 102, views/content.scss */
   .lt-ie9 .content-item__image img {
     visibility: visible; }
-/* line 103, views/content.scss */
+/* line 106, views/content.scss */
 .lt-ie9 .replacement {
   display: none; }
 

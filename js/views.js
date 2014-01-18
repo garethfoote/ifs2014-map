@@ -26,7 +26,9 @@ var PinView = Backbone.View.extend({
 
         icon = L.icon({
                 iconUrl: 'img/marker_red.png',
+                iconRetinaUrl: 'img/marker_red@2x.png',
                 shadowUrl: 'img/marker_shadow.png',
+                shadowRetinaUrl: 'img/marker_shadow@2x.png',
 
                 iconSize:     [25, 40],
                 shadowSize:   [25, 19],
@@ -149,9 +151,9 @@ var ContentView = Backbone.View.extend({
         pckry.layout();
 
         if( this.$contentitems.length > 0 ){
-            $(".overlay--content").removeClass("is-empty");
+            $("#app").removeClass("is-empty");
         } else {
-            $(".overlay--content").addClass("is-empty");
+            $("#app").addClass("is-empty");
         }
 
     },
@@ -316,7 +318,8 @@ var ItemView = Backbone.View.extend({
 var FilterPanelView = Backbone.View.extend({
 
     el : $(".filters-panel"),
-    $info : $(".controls__filter-info"),
+    $infocountry : $(".controls__filter-info--country"),
+    $infozoom : $(".controls__filter-info--zoom"),
     events : {
         "click .filter__type"    : "toggleType",
         "click .filter__country" : "filterCountry"
@@ -335,18 +338,19 @@ var FilterPanelView = Backbone.View.extend({
     filterCountry : function( e ){
 
         var $el = $(e.currentTarget);
+        console.log(e, $el);
 
         if( $el.hasClass("is-selected") ){
             // Deslect active one.
             $el.removeClass("is-selected");
-            this.$info.removeClass("has-filter");
+            this.$infocountry.removeClass("has-filter");
         } else {
             // Deselect all classes.
             this.$(".filter__country").removeClass("is-selected");
             // Add new one.
             $el.addClass("is-selected");
             $(".controls__filter-info__country", this.$info).html($el.data("country"));
-            this.$info.addClass("has-filter");
+            this.$infocountry.addClass("has-filter");
         }
 
         this.trigger("filtercountry", $el.data("country"));
