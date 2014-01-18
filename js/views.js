@@ -338,7 +338,8 @@ var FilterPanelView = Backbone.View.extend({
     filterCountry : function( e ){
 
         var $el = $(e.currentTarget);
-        console.log(e, $el);
+
+        e.preventDefault();
 
         if( $el.hasClass("is-selected") ){
             // Deslect active one.
@@ -386,7 +387,6 @@ var FilterPanelView = Backbone.View.extend({
 
 var CountryFilterView = Backbone.View.extend({
 
-
     template: _.template( $('#ifstpl__filter-country').html() ),
     tagName: "a",
     className: "filter filter__country",
@@ -396,6 +396,7 @@ var CountryFilterView = Backbone.View.extend({
         this.$el.html( this.template({ country : this.model.get("shortcode") }));
         this.$el.addClass((!even)?" is-even":" is-odd");
         this.$el.data("country", this.model.get("country") );
+        this.$el.attr( "href", "#" );
 
         return this;
     }
