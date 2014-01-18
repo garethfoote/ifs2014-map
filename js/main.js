@@ -358,9 +358,9 @@ window.onload = function(){
     // Set underscore templateing to handlebar style.
     app.init();
 
-    var venuesdataurl = "data/markers.json",
-        dataurl = "http://mysterious-crag-7636.herokuapp.com/output.json",
-        //dataurl = "http://localhost:5000/output.json",
+    var venuesdataurl = "data/venuemarkers.json",
+        // dataurl = "http://mysterious-crag-7636.herokuapp.com/output.json",
+        dataurl = "http://localhost:5000/output.json",
         countrydataurl = "data/countrymap.json",
         iscountrydataloaded = false, iscontentdataloaded = false,
         loadeddata = { content : {}, countries : {} };
