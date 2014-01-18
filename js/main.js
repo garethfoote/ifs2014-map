@@ -326,6 +326,7 @@ var app = (function(){
                 zoomLevelThreshold = 5;
 
             models.each(function(item){
+
                 var loc = item.getlocation();
 
                 isWithinBounds = currbounds.contains(L.latLng(loc.latitude, loc.longitude));
@@ -388,4 +389,4 @@ window.onload = function(){
     // xhr.open("GET", "http://mysterious-crag-7636.herokuapp.com/output.json", false);
     // xhr.open("GET", "http://localhost:5000/output.json", false);
     // xhr.open("GET", "data/output001.json", false);
-
+};
