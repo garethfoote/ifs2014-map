@@ -15,11 +15,6 @@
         <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 
         <script src="js/vendor/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script src='js/vendor/mapbox/mapbox.js'></script>
-        <script src='js/vendor/packery/packery.pkgd.min.js'></script>
-        <script src="js/vendor/jquery/jquery-1.10.2.min.js"></script>
-        <script src="js/vendor/lodash/lodash.min.js"></script>
-        <script src="js/vendor/backbone/backbone-min.js"></script>
 
         <script type="text/javascript" charset="utf-8">
             window.getParameter = function(name) {
@@ -93,23 +88,25 @@
             <div class="content-item__box">
                 <% if(caption && caption.text) { %><%= caption.text+" "+custom_caption %><% } else { %><%= custom_caption %> <% } %>
             </div>
-            <div class="content-item__box content-item__user">
-                <a href="">
-                    <img title="{{user.username}} Profile Picture" class="content-item__profile" src="<%= user.profile_picture %>" />
+            <div class="content-item__box content-item__user clearfix">
+                <a target="_blank" class="content-item__profile" href="http://instagram.com/<%=user.username %>">
+                    <img title="<%=user.username %> Profile Picture" src="<%= user.profile_picture %>" />
                 </a>
                 <div class="content-item__user-info">
-                    <span class="content-item__name"><%= user.full_name %></span><br/>
-                    <ul class="content-item__custom-tags">
-                    <% _.forEach(custom_tags, function(tag) { %><li><%- tag %></li><% }); %>
-                    </ul>
+                    <span class="content-item__name"><%= user.full_name %></span>
+                    <span class="content-item__country"><%= country %> / <%= shortcode %></span>
                 </div>
+            </div>
+            <div class="content-item__box clearfix">
+                <ul class="content-item__custom-tags">
+                <% _.forEach(custom_tags, function(tag) { %><li><%= tag %></li><% }); %>
+                </ul>
             </div>
 
         </script>
 
-        <script src="js/polyfills.js"></script>
-        <script src="js/views.js"></script>
-        <script src="js/main.js"></script>
+        <!-- <script src="js/vendor/require/require.min.js" data-main="js/app/config.js"></script> -->
+        <script src="js/vendor/require/require.min.js" data-main="js/dist.js"></script>
 
     </body>
 </html>

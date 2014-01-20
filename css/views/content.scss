@@ -1,5 +1,4 @@
 #content {
-    pointer-events:none;
     min-height: 100%;
     // position: relative;
     left: 0;
@@ -39,30 +38,45 @@
 }
 
 .content-item__box {
-    padding: 7px;
+    padding: 8px 7px;
     border-bottom: solid 1px #ececec;
 }
 
+$user-height: 32px;
 .content-item__user {
-    height: 30px;
+
 }
 
 .content-item__profile {
-    width: auto;
-    height: 100%;
+    height: $user-height;
+    width: $user-height;
     float: left;
 }
 
 .content-item__user-info {
     float: left;
     margin-left: 4px;
-    color: $colour-content-info;
+}
+
+.content-item__country,
+.content-item__name {
+    overflow: hidden;
+    // padding: 7px*2=14px & margin-left: 4px.
+    width: $item-width - $user-height - (14px + 4px);
+    display: block;
+    white-space: nowrap;
+    color: $colour-content-name;
+}
+
+.content-item__country {
+    color: $colour-content-country;
 }
 
 .content-item__custom-tags {
     list-style:none;
     margin: 0;
     padding: 0;
+    float: left;
     color: $colour-content-customtags;
     li {
         display: inline-block;

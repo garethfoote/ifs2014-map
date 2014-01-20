@@ -58,12 +58,31 @@ html, body {
     left: 0;
 }
 
-.is-empty {
-    .controls__filter-info--zoom {
+
+.controls__filters {
+    $size: 30px;
+    display: block;
+    width: auto;
+    color: rgb(87, 85, 85);
+    line-height: $size;
+    font-weight: bold;
+    background: $colour-panelbg;
+    text-align: center;
+    padding: 0 5px;
+    float: left;
+    border-left: solid 1px $colour-divider;
+    &:after {
+        position: relative;
         display: block;
+        width: auto;
+        height: $size;
+        font-size: 14px;
+        content: "\2192  Show";
+    }
+    &.is-open:after {
+        content: "\2190  Hide";
     }
 }
-
 
 .controls__filter-info {
     $size: 30px;
@@ -81,31 +100,16 @@ html, body {
     }
 }
 
-.controls__filters {
-    $size: 30px;
-    display: block;
-    width: auto;
-    color: rgb(87, 85, 85);
-    line-height: $size;
-    font-weight: bold;
-    background: $colour-panelbg;
-    text-align: center;
-    padding: 0 5px;
-    float: left;
-    border-left: solid 1px #ececec;
-    &:after {
-        position: relative;
+.is-empty {
+    .controls__filter-info--zoom {
         display: block;
-        width: auto;
-        height: $size;
-        font-size: 14px;
-        content: "\2192  Show";
-    }
-    &.is-open:after {
-        content: "\2190  Hide";
     }
 }
 
+.controls__filter-info__country {
+    text-transform: uppercase;
+    color: $colour-filteractive;
+}
 
 .fullscreen {
     position: absolute;
