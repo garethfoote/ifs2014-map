@@ -120,6 +120,18 @@ input[type="email"] {
 }
 
 /*--- Modules ---*/
+@mixin cta($size) {
+    display: block;
+    width: auto;
+    line-height: $size;
+    color: $colour-control-info-text;
+    @include rgba-fb("bg", $colour-panelbg, $colour-panelbg-opacity);
+    padding: 0 5px;
+    float: left;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .btn {
     display: block;
     @include font-size( 16 );

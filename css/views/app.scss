@@ -31,7 +31,7 @@ html, body {
 
 .overlay--content {
     left: 127px;
-    background-color: $colour-panelbg;
+    @include rgba-fb("bg", $colour-panelbg, $colour-panelbg-opacity);
     .overlay__inner {
         height: 100%;
     }
@@ -41,12 +41,10 @@ html, body {
     left: 0;
 }
 
-.controls {
+.control-info {
     position: absolute;
     top: 0;
     left: (95+8+8+16)*1px;
-    font-weight: bold;
-    letter-spacing: 2px;
     width: ($item-width+$item-border)*2;
 
     @media (max-width: ($item-width+$item-border)*2) {
@@ -54,46 +52,37 @@ html, body {
     }
 }
 
-.has-hidden-filters .controls {
+.has-hidden-filters .control-info {
     left: 0;
 }
 
+$size: 32px;
+.control-info__pane {
+    @include cta($size);
+}
 
-.controls__filters {
-    $size: 30px;
-    display: block;
-    width: auto;
-    color: rgb(87, 85, 85);
-    line-height: $size;
-    font-weight: bold;
-    background: $colour-panelbg;
+.control-info__toggle-filters {
     text-align: center;
-    padding: 0 5px;
-    float: left;
     border-left: solid 1px $colour-divider;
     &:after {
         position: relative;
         display: block;
         width: auto;
         height: $size;
-        font-size: 14px;
         content: "\2192  Show";
     }
     &.is-open:after {
         content: "\2190  Hide";
     }
+
+    &:hover {
+        @include rgba-fb("bg", $colour-panelbg, $colour-panelbg-opacity + 0.2);
+    }
 }
 
-.controls__filter-info {
-    $size: 30px;
+.control-info__country,
+.control-info__zoom {
     display: none;
-    width: auto;
-    color: rgb(87, 85, 85);
-    line-height: $size;
-    font-weight: bold;
-    background: $colour-panelbg;
-    padding: 0 5px;
-    float: left;
     border-left: solid 1px $colour-divider;
     &.has-filter {
         display: block;
@@ -101,21 +90,26 @@ html, body {
 }
 
 .is-empty {
-    .controls__filter-info--zoom {
+    .control-info__zoom {
         display: block;
     }
 }
 
-.controls__filter-info__country {
+.control-info__filtered-country {
     text-transform: uppercase;
     color: $colour-filteractive;
 }
 
-.fullscreen {
+.control-info__fullscreen {
     position: absolute;
     left: 100%;
     top: 100%;
-    margin: -30px 0 0 -100px;
+    margin: -30px 0 0 -96px;
+    width: 86px;
+    text-align: center;
+    &:hover {
+        @include rgba-fb("bg", $colour-panelbg, $colour-panelbg-opacity + 0.2);
+    }
 }
 
 /* Let's get this party started */

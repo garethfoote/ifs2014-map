@@ -1,19 +1,25 @@
+$brand-red: #f72a34;
+// $brand-x: #f72a34;
+$focus-outline: thin dotted;
+$base-width: 976px;
+
+// General
 $doc-font-size: 12;
 $doc-line-height: 18;
 
-$focus-outline: thin dotted;
-
-$colour-panelbg: rgba(216, 214, 215, 0.75);
-$colour-filteractive: #f72a34;
-$colour-content-name: #000;
-$colour-content-country: $colour-filteractive;
-$colour-content-customtags: #bbbbbb;
+// $colour-panelbg: rgba(216, 214, 215, 0.75);
+$colour-panelbg: rgb(216, 214, 215);
+$colour-panelbg-opacity: 0.8;
 $colour-divider: #ececec;
-
-$base-width: 976px;
-
 
 // Content items
 $item-width: 170px;
 $item-border: 8px;
 $item-border-radius: 3px;
+$colour-content-name: #000;
+$colour-content-country: $brand-red;
+$colour-content-customtags: #bbbbbb;
+//Filters
+$colour-filteractive: $brand-red;
+// Control and info
+$colour-control-info-text: #121212;
