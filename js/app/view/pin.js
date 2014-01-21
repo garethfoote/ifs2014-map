@@ -86,6 +86,7 @@ define(["app/common"], function(common) {
         popupopenhandler : function( e ){
 
             this.focus();
+            common.trigger("pinclick", this.model.getlocation());
 
         },
 

@@ -45,6 +45,7 @@ function( common, venuedata, countrymapdata,
             appview = {},
             currenttype = "studio";
             currentcountryfilter = "",
+            lastzoom = -1,
 
             handleData = function( contentdata, countrymap ){
 
@@ -64,7 +65,11 @@ function( common, venuedata, countrymapdata,
                 });
                 common.on("filtertype", setType );
 
+                // Filter content after all movements and scaling.
                 appview.map.on("moveend", pinsWithinBounds);
+
+                // Cache first zoom.
+                lastzoom = appview.map.getZoom();
 
             },
 
@@ -183,24 +188,34 @@ function( common, venuedata, countrymapdata,
                 var currbounds = appview.map.getBounds(),
                     currzoom = appview.map.getZoom(),
                     i = 0, isWithinBounds = false,
-                    zoomLevelThreshold = 5;
+                    zoomthreshold = common.getConfig("contentzoomthreshold");
 
+                /* Disbling this feature for the time being. Causing comlications.
+                // If zooming out and ... and ...
+                if( currzoom < lastzoom
+                        && currentcountryfilter !== ""
+                        && zoomthreshold > currzoom ){
 
-                if( currentcountryfilter !== ""
-                        && zoomLevelThreshold > currzoom ){
-
-                    // Turn off country filter if its on.
+                    // ...turn off country filter if its on.
                     filterCountry( currentcountryfilter );
                     appview.toggleoffcountryfilter();
+                }
+                */
+
+                // Zooming out.
+                if( currzoom < lastzoom ){
+                    appview.map.closePopup();
 
                 }
+
+                lastzoom = currzoom;
 
                 models.each(function(item){
 
                     var loc = item.getlocation();
 
                     isWithinBounds = currbounds.contains(L.latLng(loc.latitude, loc.longitude));
-                    if( currzoom >= zoomLevelThreshold && isWithinBounds ){
+                    if( currzoom >= zoomthreshold && isWithinBounds ){
                         item.set("inviewport", true);
                     } else {
                         item.set("inviewport", false);

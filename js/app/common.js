@@ -5,6 +5,9 @@ define(["mapbox", "packery"], function(L, Packery) {
         this.pckry = {};
 
         var self = this,
+            config = {
+                contentzoomthreshold : 5
+            },
 
             initPackery = function( el, options ){
 
@@ -15,7 +18,10 @@ define(["mapbox", "packery"], function(L, Packery) {
             };
 
         return {
-            initPackery : initPackery
+            initPackery : initPackery,
+            getConfig : function(name){
+                return config[name];
+            }
         };
     };
 

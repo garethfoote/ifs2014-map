@@ -1,15 +1,10 @@
 .filters-panel {
     position: relative;
-    // top: 0;
     height: auto;
-    // width: percentagewidth(95px, $base-width);
     width: 95px;
-    //padding: 10px percentagewidth(27px, $base-width) 0;
     padding: 8px 8px 0;
     margin: 0 0  0 16px;
-    // margin: 16px 0  0 percentagewidth(16px, $base-width);
-    background: $colour-panelbg;
-    // float: left;
+    @include rgba-fb("bg", $colour-panelbg, $colour-panelbg-opacity);
     font-weight: bold;
     letter-spacing: 2px;
 }

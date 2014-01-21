@@ -8,6 +8,17 @@
     @return $px * 1px;
 }
 
+@mixin rgba-fb($type, $color, $percentage) {
+    @if $type == color {
+        color: $color;
+        color: rgba($color, $percentage);
+    }
+    @if $type == bg {
+        background-color: $color;
+        background-color: rgba($color, $percentage);
+    }
+}
+
 @mixin translate($x, $y) {
     -webkit-transform: translate($x, $y);
     -moz-transform: translate($x, $y);

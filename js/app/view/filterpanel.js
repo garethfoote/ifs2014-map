@@ -7,8 +7,8 @@ function( common, CountryFilterView ) {
     var FilterPanelView = Backbone.View.extend({
 
         el : $(".filters-panel"),
-        $infocountry : $(".controls__filter-info--country"),
-        $infozoom : $(".controls__filter-info--zoom"),
+        $infocountry : $(".js-info-country"),
+        $infozoom : $(".js-info-zoom"),
         events : {
             "click .filter__type"    : "toggleType",
             "click .filter__country" : "filterCountry"
@@ -36,10 +36,10 @@ function( common, CountryFilterView ) {
                 this.$infocountry.removeClass("has-filter");
             } else {
                 // Deselect all classes.
-                this.$(".filter__country").removeClass("is-selected");
+                this.$(".js-filter-panel-countries .filter__country").removeClass("is-selected");
                 // Add new one.
                 $el.addClass("is-selected");
-                $(".controls__filter-info__country", this.$info).html($el.data("country"));
+                $(".js-info-filtered-country", this.$info).html($el.data("country"));
                 this.$infocountry.addClass("has-filter");
             }
 
@@ -66,13 +66,13 @@ function( common, CountryFilterView ) {
 
         toggleoffcountry : function(){
 
-            this.$(".is-selected").removeClass("is-selected");
+            this.$(".js-filters-panel-countries .is-selected").removeClass("is-selected");
             this.$infocountry.removeClass("has-filter");
         },
 
         togglepanel : function(){
 
-            var $app = $("#app"), $ctrl = $(".controls__filters");
+            var $app = $("#app"), $ctrl = $(".js-toggle-filters");
             $app.toggleClass("has-hidden-filters");
             $ctrl.toggleClass("is-open");
 
