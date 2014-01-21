@@ -116,29 +116,40 @@ function( common, ContentView, FilterPanelView, PinView ) {
         contentview : {},
         filterview : {},
         events : {
-            "click .controls__filters" : "togglefilterpanel"
+            "click .js-toggle-filters" : "togglefilterpanel"
         },
 
         initialize : function(){
 
             var options = {
                 zoomControl : false,
+                attributionControl: false
             };
 
             var tileoptions = {
                 maxZoom : 25,
                 minZoom : 2,
-                noWrap : true
+                noWrap : true,
+                attribution: "<a href='http:\/\/mapbox.com\/about\/maps' target='_blank'>Terms & Feedback<\/a>"
             };
 
-            this.map = L.map('map', options).setView([25, -4], 3);            
-            L.mapbox.tileLayer('danielc-s.h0hhc1fe', tileoptions).addTo(this.map);
-
+            this.map = L.map('map', options).setView([25, -4], 3);
+            // L.mapbox.tileLayer('danielc-s.h0hhc1fe', tileoptions).addTo(this.map);
+            L.mapbox.tileLayer('garethfoote.gp6gm5ln', tileoptions).addTo(this.map);
             L.control.zoom({ position : "topright" }).addTo(this.map);
 
-            $(".fullscreen").on("click", function(){
+            common.on("pinclick", this.pinclickhandler, this);
+
+            $(".js-fullscreen").on("click", function(e){
+                e.preventDefault();
                 togglefullscreen(document.getElementById("app"));
             });
+
+        },
+
+        pinclickhandler : function(loc){
+
+            this.map.setView(L.latLng(loc.latitude, loc.longitude), common.getConfig("contentzoomthreshold"));
 
         },
 
