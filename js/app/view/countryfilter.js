@@ -8,10 +8,14 @@ define(function() {
 
         render : function( even ){
 
-            this.$el.html( this.template({ country : this.model.get("shortcode") }));
+            var sc = this.model.get("shortcode");
+            this.$el.html( this.template({ country : sc }));
             this.$el.addClass((!even)?" is-even":" is-odd");
             this.$el.data("country", this.model.get("country") );
             this.$el.attr( "href", "#" );
+            if( sc.length > 3 ){
+                this.$el.addClass("is-long");
+            }
 
             return this;
         }

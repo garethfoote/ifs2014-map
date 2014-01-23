@@ -11,6 +11,7 @@ function( common, venuedata, countrymapdata,
 
     var ContentItem = Backbone.Model.extend({
         defaults: {
+            "focus"               : false,
             "removed"             : false,
             "inviewport"          : false,
             "isfiltered-type"     : false,
@@ -135,11 +136,6 @@ function( common, venuedata, countrymapdata,
 
             },
 
-            fitWorld = function(){
-
-
-            },
-
             setType = function( type ){
 
                 // Current type state maintained in main.js.
@@ -169,14 +165,14 @@ function( common, venuedata, countrymapdata,
 
                 });
 
-                if( bounds.length > 0 ){
-                    if( currenttype === "showcase" ){
-                        appview.map.fitBounds(bounds, { maxzoom : 12 });
-                    } else {
-                        // TODO - Determine whether we want to do this 
-                        // for studio. Speak to X,F & D.
-                        // map.fitbounds(bounds, { maxzoom : 17 });
-                    }
+
+                // TODO - Do we want to do anything with bounds here.
+                if( currenttype === "showcase" ){
+                    // Set to central London.
+                    appview.map.setView(common.getConfig("centrallondon"), 12 );
+                } else {
+                    // Reset to world.
+                    appview.map.fitWorld();
                 }
 
                 appview.layout();
@@ -189,6 +185,7 @@ function( common, venuedata, countrymapdata,
                     currzoom = appview.map.getZoom(),
                     i = 0, isWithinBounds = false,
                     zoomthreshold = common.getConfig("contentzoomthreshold");
+
 
                 /* Disbling this feature for the time being. Causing comlications.
                 // If zooming out and ... and ...

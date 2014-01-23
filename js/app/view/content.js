@@ -47,6 +47,9 @@ define(["app/common", "app/view/contentitem" ], function(common, ItemView) {
                 && item.get("isfiltered-country") === false
                 && item.get("isfiltered-type") === false ){
                 this.addone( item );
+                if( item.get("focus") === true ){
+                    this.$contentcontainer.addClass("is-focussed");
+                }
             } else {
                 this.removeone( item );
             }

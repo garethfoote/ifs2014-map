@@ -44,8 +44,6 @@ function( common, ContentView, FilterPanelView, PinView ) {
 
         });
 
-        filterType();
-
     },
 
     renderFilters = function(view, models){
@@ -102,7 +100,6 @@ function( common, ContentView, FilterPanelView, PinView ) {
         var element = document;
         // Supports most browsers and their versions.
         var requestMethod = element.exitFullScreen || element.cancelFullScreen || element.webkitCancelFullScreen || element.mozCancelFullScreen || element.msExitFullScreen;
-        console.log(requestMethod);
 
         if (requestMethod) {
             requestMethod.call(element);
@@ -121,21 +118,22 @@ function( common, ContentView, FilterPanelView, PinView ) {
 
         initialize : function(){
 
-            var options = {
-                zoomControl : false,
-                attributionControl: false
-            };
-
-            var tileoptions = {
-                maxZoom : 25,
-                minZoom : 2,
-                noWrap : true,
-                attribution: "<a href='http:\/\/mapbox.com\/about\/maps' target='_blank'>Terms & Feedback<\/a>"
-            };
+            var tileurl = 'http://{s}.tile.cloudmade.com/EF97C7CAB8924037BEFDF16FB9EE9BFD/119481/256/{z}/{x}/{y}.png',
+                options = {
+                    zoomControl : false,
+                    attributionControl: false
+                },
+                tileoptions = {
+                    maxZoom : 25,
+                    minZoom : 2,
+                    noWrap : true,
+                    attribution: "<a href='http:\/\/mapbox.com\/about\/maps' target='_blank'>Terms & Feedback<\/a>"
+                };
 
             this.map = L.map('map', options).setView([25, -4], 3);
             // L.mapbox.tileLayer('danielc-s.h0hhc1fe', tileoptions).addTo(this.map);
-            L.mapbox.tileLayer('garethfoote.gp6gm5ln', tileoptions).addTo(this.map);
+            // L.mapbox.tileLayer('garethfoote.gp6gm5ln', tileoptions).addTo(this.map);
+            L.tileLayer(tileurl, tileoptions).addTo(this.map);
             L.control.zoom({ position : "topright" }).addTo(this.map);
 
             common.on("pinclick", this.pinclickhandler, this);
@@ -149,7 +147,10 @@ function( common, ContentView, FilterPanelView, PinView ) {
 
         pinclickhandler : function(loc){
 
-            this.map.setView(L.latLng(loc.latitude, loc.longitude), common.getConfig("contentzoomthreshold"));
+            var zoomthreshold = common.getConfig("contentzoomthreshold");
+            if( this.map.getZoom() < zoomthreshold ){
+                this.map.setView(L.latLng(loc.latitude, loc.longitude), zoomthreshold);
+            }
 
         },
 
