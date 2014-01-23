@@ -36,7 +36,7 @@ function( common, CountryFilterView ) {
                 this.$infocountry.removeClass("has-filter");
             } else {
                 // Deselect all classes.
-                this.$(".js-filter-panel-countries .filter__country").removeClass("is-selected");
+                this.$(".js-filters-panel-countries .filter__country").removeClass("is-selected");
                 // Add new one.
                 $el.addClass("is-selected");
                 $(".js-info-filtered-country", this.$info).html($el.data("country"));
