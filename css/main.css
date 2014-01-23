@@ -1088,11 +1088,15 @@ html, body {
   background: black;
   padding: 3px 0; }
 
-/* line 52, views/filters.scss */
+/* line 47, views/filters.scss */
+.filter.is-long {
+  letter-spacing: 1px; }
+
+/* line 56, views/filters.scss */
 .filter__type.is-selected,
 .filter__country.is-selected {
   background-color: #f72a34; }
 
-/* line 56, views/filters.scss */
+/* line 60, views/filters.scss */
 .filter__country:last-child {
   margin-bottom: 6px; }
