@@ -31,12 +31,12 @@ define(["app/common"], function(common) {
 
             // If no custom caption. Avoids error in templating.
             if(!_.has(this.model.attributes, "custom_caption")){
-                this.model.set("custom_caption", "");
+                this.model.set("custom_caption", "", { silent : true });
             }
 
             // If no custom tags. Avoids error in templating.
             if(!_.has(this.model.attributes, "custom_tags") || _.isNull(this.model.get("custom_tags"))) {
-                this.model.set("custom_tags", []);
+                this.model.set("custom_tags", [], { silent : true });
             }
 
             // Render template.
@@ -45,7 +45,10 @@ define(["app/common"], function(common) {
             this.$el.data("created_time", this.model.get("created_time"));
             this.$el.data("id", this.model.get("id"));
 
-            this.focusHandler();
+            if( this.model.get('focus') === true ){
+                this.focusHandler();
+            }
+
 
             return this;
         },
