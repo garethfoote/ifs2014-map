@@ -40,6 +40,7 @@ function( common, CountryFilterView ) {
                 // Add new one.
                 $el.addClass("is-selected");
                 $(".js-info-filtered-country", this.$info).html($el.data("country"));
+                $(".js-info-filtered-exhibition", this.$info).html($el.data("exhibition"));
                 this.$infocountry.addClass("has-filter");
             }
 
@@ -54,6 +55,7 @@ function( common, CountryFilterView ) {
             e.preventDefault();
 
             if( $el.hasClass("is-selected") ){
+                common.trigger("filtertypereset");
                 return;
             } else {
                 this.$(".filter__type").removeClass("is-selected");
