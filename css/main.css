@@ -856,26 +856,29 @@ html, body {
     background-color: #d8d6d7;
     background-color: #d8d6d7; }
 
-/* line 84, views/app.scss */
-.control-info__country,
+/* line 83, views/app.scss */
 .control-info__zoom {
-  display: none;
   border-left: solid 1px #ececec; }
-  /* line 87, views/app.scss */
-  .control-info__country.has-filter,
-  .control-info__zoom.has-filter {
+
+/* line 86, views/app.scss */
+.control-info__country {
+  display: none;
+  border-left: solid 1px #ececec;
+  clear: left; }
+  /* line 90, views/app.scss */
+  .control-info__country.has-filter {
     display: block; }
 
-/* line 93, views/app.scss */
+/* line 96, views/app.scss */
 .is-empty .control-info__zoom {
   display: block; }
 
-/* line 98, views/app.scss */
+/* line 101, views/app.scss */
 .control-info__filtered-country {
   text-transform: uppercase;
   color: #f72a34; }
 
-/* line 103, views/app.scss */
+/* line 106, views/app.scss */
 .control-info__fullscreen {
   position: absolute;
   left: 100%;
@@ -883,29 +886,29 @@ html, body {
   margin: -30px 0 0 -96px;
   width: 86px;
   text-align: center; }
-  /* line 110, views/app.scss */
+  /* line 113, views/app.scss */
   .control-info__fullscreen:hover {
     background-color: #d8d6d7;
     background-color: #d8d6d7; }
 
 /* Let's get this party started */
-/* line 116, views/app.scss */
+/* line 119, views/app.scss */
 ::-webkit-scrollbar {
   width: 6px;
   opacity: 0.5; }
 
 /* Track */
-/* line 122, views/app.scss */
+/* line 125, views/app.scss */
 ::-webkit-scrollbar-track {
   height: 95%;
   padding: 10px 0; }
 
 /* Handle */
-/* line 129, views/app.scss */
+/* line 132, views/app.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 0, 0, 0.8); }
 
-/* line 134, views/app.scss */
+/* line 137, views/app.scss */
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4); }
 
@@ -936,7 +939,7 @@ html, body {
 
 /* line 9, views/content.scss */
 .content__items {
-  padding: 70px 25px 0 0;
+  padding: 112px 25px 0 0;
   width: 356px; }
   @media (max-width: 356px) {
     /* line 9, views/content.scss */
