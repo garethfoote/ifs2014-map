@@ -80,10 +80,13 @@ $size: 32px;
     }
 }
 
-.control-info__country,
 .control-info__zoom {
+    border-left: solid 1px $colour-divider;
+}
+.control-info__country {
     display: none;
     border-left: solid 1px $colour-divider;
+    clear: left;
     &.has-filter {
         display: block;
     }
