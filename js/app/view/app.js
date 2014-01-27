@@ -1,8 +1,9 @@
 define(["app/common",
+        "text!data/countrymap.json",
         "app/view/content",
         "app/view/filterpanel",
         "app/view/pin"],
-function( common, ContentView, FilterPanelView, PinView ) {
+function( common, countrymapdata, ContentView, FilterPanelView, PinView ) {
 
     // Private functions.
     var renderPins = function(map, models){
@@ -46,30 +47,6 @@ function( common, ContentView, FilterPanelView, PinView ) {
 
     },
 
-    renderFilters = function(view, models){
-
-        /*
-        ["AUS", "AUT", "BOL", "BHR", "CHN", "DEN",
-        "EST", "JPN", "KOR", "LON", "LUX", "MAL",
-        "POR", "ROM", "RUS", "SVG", "SER", "SLO",
-        "SRI", "SWI", "TRI", "SWE", "UKR", "VIE"].forEach(function(item){
-            countrygroups[item] = {};
-        });
-        */
-
-        var countries = {};
-        models.each(function(item){
-            var c = item.get("country");
-            if( !(c in countries) ){
-                countries[c] = item;
-            }
-        });
-
-        for (var c in countries) {
-            view.addone( countries[c] );
-        }
-
-    },
 
     togglefullscreen = function(elem){
 
@@ -116,10 +93,10 @@ function( common, ContentView, FilterPanelView, PinView ) {
             "click .js-toggle-filters" : "togglefilterpanel"
         },
 
-        initialize : function(){
+        initialize : function( options ){
 
             var tileurl = 'http://{s}.tile.cloudmade.com/EF97C7CAB8924037BEFDF16FB9EE9BFD/119481/256/{z}/{x}/{y}.png',
-                options = {
+                mapoptions = {
                     zoomControl : false,
                     attributionControl: false
                 },
@@ -130,7 +107,7 @@ function( common, ContentView, FilterPanelView, PinView ) {
                     attribution: "<a href='http:\/\/mapbox.com\/about\/maps' target='_blank'>Terms & Feedback<\/a>"
                 };
 
-            this.map = L.map('map', options).setView([25, -4], 3);
+            this.map = L.map('map', mapoptions).setView(common.getConfig("startpos"), common.getConfig("startscale"));
             // L.mapbox.tileLayer('danielc-s.h0hhc1fe', tileoptions).addTo(this.map);
             // L.mapbox.tileLayer('garethfoote.gp6gm5ln', tileoptions).addTo(this.map);
             L.tileLayer(tileurl, tileoptions).addTo(this.map);
@@ -142,6 +119,14 @@ function( common, ContentView, FilterPanelView, PinView ) {
                 e.preventDefault();
                 togglefullscreen(document.getElementById("app"));
             });
+
+            options.countries.on("add", this.renderFilter, this);
+
+        },
+
+        resetworld : function(){
+
+            this.map.setView(common.getConfig("startpos"), common.getConfig("startscale"));
 
         },
 
@@ -161,7 +146,12 @@ function( common, ContentView, FilterPanelView, PinView ) {
             this.filterview = new FilterPanelView();
 
             renderPins(this.map, this.collection);
-            renderFilters(this.filterview, this.collection);
+
+        },
+
+        renderFilter : function( country ){
+
+            this.filterview.addone( country );
 
         },
 

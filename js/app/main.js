@@ -35,7 +35,19 @@ function( common, venuedata, countrymapdata,
     });
 
     var Items = Backbone.Collection.extend({
-        model: ContentItem,
+        model: ContentItem
+    });
+
+    var Country = Backbone.Model.extend({
+        defaults: {
+            "name"                : "",
+            "shortcode"           : "",
+            "exhibition"          : ""
+        }
+    });
+
+    var Countries = Backbone.Collection.extend({
+        model: Country
     });
 
     var app = (function(){
@@ -43,6 +55,7 @@ function( common, venuedata, countrymapdata,
         var self = this,
 
             models = new Items(),
+            countries = new Countries(),
             appview = {},
             currenttype = "studio";
             currentcountryfilter = "",
@@ -54,17 +67,33 @@ function( common, venuedata, countrymapdata,
                 for (var i = 0; i < contentdata.length; i++) {
                     contentdata[i].shortcode = ( _.has(countrymap, contentdata[i].country))
                             ? countrymap[contentdata[i].country].shortcode : "";
+
+                    contentdata[i].exhibition = ( _.has(countrymap, contentdata[i].country))
+                            ? countrymap[contentdata[i].country].exhibition : "";
                     models.add(contentdata[i]);
                 }
 
-                appview = new AppView({collection: models});
+                appview = new AppView({collection: models, countries : countries});
                 appview.render();
+
+                // Create country models.
+                for( var c in countrymap ){
+                    countrymap[c].country = c;
+                    countries.add( countrymap[c] );
+                }
 
                 // Event listeners.
                 common.on("filtercountry", function(country){
                     filterCountry( country, true );
                 });
                 common.on("filtertype", setType );
+                common.on("filtertypereset", function(){
+                    if( currentcountryfilter !== "" ){
+                        filterCountry( currentcountryfilter );
+                        appview.toggleoffcountryfilter();
+                    }
+                    appview.resetworld();
+                });
 
                 // Filter content after all movements and scaling.
                 appview.map.on("moveend", pinsWithinBounds);
@@ -126,8 +155,8 @@ function( common, venuedata, countrymapdata,
                 if( currenttype === "studio" && changeScale === true ){
                     // scale to fit all markers.
                     if( togglingOff === true ){
-                        appview.map.fitWorld();
-                    } else {
+                        appview.resetworld();
+                    } else if ( bounds.length > 0 ){
                         appview.map.fitBounds(bounds, { maxZoom : 12 });
                     }
                 }
@@ -172,7 +201,7 @@ function( common, venuedata, countrymapdata,
                     appview.map.setView(common.getConfig("centrallondon"), 12 );
                 } else {
                     // Reset to world.
-                    appview.map.fitWorld();
+                    appview.resetworld();
                 }
 
                 appview.layout();
