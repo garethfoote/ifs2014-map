@@ -7,7 +7,9 @@ define(["mapbox", "packery"], function(L, Packery) {
         var self = this,
             config = {
                 contentzoomthreshold : 5,
-                centrallondon : [51.501369818211096, -0.12651443481445312]
+                centrallondon : [51.501369818211096, -0.12651443481445312],
+                startpos : [25, -4],
+                startscale : 3
             },
 
             initPackery = function( el, options ){
