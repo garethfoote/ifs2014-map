@@ -1,15 +1,15 @@
 {
     "Argentina": {
         "shortcode": "ARG",
-        "exhibition": "Treading Paths to Beauty"
+        "exhibition": "LAND OF DIVERSITY, TIME OF CONTRASTS"
     },
     "Austria": {
         "shortcode": "AUT",
-        "exhibition": "Another Austria"
+        "exhibition": "ANOTHER AUSTRIA"
     },
     "Brazil": {
         "shortcode": "BRA",
-        "exhibition": "Penta"
+        "exhibition": "PENTA"
     },
     "Czech Republic": {
         "shortcode": "CZE",
@@ -25,15 +25,19 @@
     },
     "China": {
         "shortcode": "CHN",
-        "exhibition": "Wonderland"
+        "exhibition": "WONDERLAND"
     },
     "Estonia": {
         "shortcode": "EST",
-        "exhibition": "Fashion Now: Estonia"
+        "exhibition": "FASHION NOW: ESTONIA"
     },
     "Georgia": {
         "shortcode": "GEO",
-        "exhibition": "Reconstruction of the Ancient Georgian Costume"
+        "exhibition": "RECONSTRUCTION OF THE ANCIENT GEORGIAN COSTUME"
+    },
+	"Jamaica": {
+        "shortcode": "JAM",
+        "exhibition": "THREAD BARE"
     },
     "Japan": {
         "shortcode": "JPN",
@@ -41,55 +45,47 @@
     },
     "Korea": {
         "shortcode": "KOR",
-        "exhibition": "K-Fashion Odyssey"
+        "exhibition": "K-FASHION ODYSSEY"
     },
     "Nigeria": {
-        "shortcode": "NIG",
-        "exhibition": "Kings and Queens of The Future"
+        "shortcode": "NGA",
+        "exhibition": "KINGS AND QUEENS OF THE FUTURE"
     },
     "Pakistan": {
         "shortcode": "PAK",
-        "exhibition": "Butterfly Effect"
-    },
-    "Panama": {
-        "shortcode": "PAN",
-        "exhibition": " Made in Panama"
+        "exhibition": "BUTTERFLY EFFECT"
     },
     "Paraguay": {
         "shortcode": "PRY",
-        "exhibition": "Ñanduti Myth: Beyond the Layers"
+        "exhibition": "ÑANDUTI MYTH: BEYOND THE LAYERS"
     },
     "Philippines": {
         "shortcode": "PHL",
-        "exhibition": "Fashion Philippines: Manila Wear"
+        "exhibition": "FASHION PHILIPPINES: MANILA WEAR"
     },
     "Portugal": {
         "shortcode": "PRT",
-        "exhibition": "Bloom"
-    },
-    "Qatar": {
-        "shortcode": "QAT",
-        "exhibition": "Abaya: Tradition Meets Elegance"
+        "exhibition": "BLOOM"
     },
     "Québec, Canada": {
         "shortcode": "CA-QC",
-        "exhibition": "Montréal – the White Winter Fashion City"
+        "exhibition": "MONTRÉAL – THE WHITE WINTER FASHION CITY"
     },
     "Romania": {
         "shortcode": "ROM",
-        "exhibition": "Beauty in the Making"
+        "exhibition": "BEAUTY IN THE MAKING"
     },
     "Switzerland": {
-        "shortcode": "SUI",
+        "shortcode": "CHE",
         "exhibition": "CH TALENTS: MODE SUISSE"
     },
     "Tanzania": {
         "shortcode": "TAN",
-        "exhibition": "Fahari Passion"
+        "exhibition": "UNSEEN DIMENSIONS: EMERGING TANZANIAN DESIGN"
     },
     "The Netherlands": {
         "shortcode": "NLD",
-        "exhibition": "Wind Knitting Factory"
+        "exhibition": "WIND KNITTING FACTORY"
     },
     "Vietnam": {
         "shortcode": "VIE",

@@ -12,6 +12,7 @@ define(function() {
             this.$el.html( this.template({ country : sc }));
             this.$el.addClass((!even)?" is-even":" is-odd");
             this.$el.data("country", this.model.get("country") );
+            this.$el.data("exhibition", this.model.get("exhibition") );
             this.$el.attr( "href", "#" );
             if( sc.length > 3 ){
                 this.$el.addClass("is-long");
