@@ -30,6 +30,11 @@ define(["app/common"], function(common) {
         render : function(){
 
             // If no custom caption. Avoids error in templating.
+            if(!_.has(this.model.attributes, "images")){
+                this.model.set("images", false, { silent : true });
+            }
+
+            // If no custom caption. Avoids error in templating.
             if(!_.has(this.model.attributes, "custom_caption")){
                 this.model.set("custom_caption", "", { silent : true });
             }

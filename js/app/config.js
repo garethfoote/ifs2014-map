@@ -8,6 +8,7 @@ require.config({
         "mapbox" : "vendor/mapbox/mapbox",
         "packery" : "vendor/packery/packery.pkgd.min",
         "jquery" : "vendor/jquery/jquery-1.10.2.min",
+        "jquery-cors" : "vendor/jquery/jquery.xdomainrequest.min",
         "lodash" : "vendor/lodash/lodash.min",
         "backbone" : "vendor/backbone/backbone-min"
     },
@@ -21,6 +22,9 @@ require.config({
         "backbone" : {
             "deps" : ["lodash", "jquery"],
             "exports" : "Backbone"
+        },
+        "jquery-cors" : {
+            "deps" : [ "jquery" ]
         },
         "lodash" : {
             "exports" : "_"

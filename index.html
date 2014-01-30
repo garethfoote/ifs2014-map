@@ -84,12 +84,13 @@
         </script>
 
         <script id="ifstpl__content-item" type="text/template">
-
+            <% if(images) { %>
             <div class="content-item__image">
                 <img src="<%= images.low_resolution.url %>" />
                 <div style="background-image: url('<%= images.low_resolution.url %>');"
                     class="replacement"></div>
             </div>
+            <% } %>
             <div class="content-item__box">
                 <% if(caption && caption.text) { %><%= caption.text+" "+custom_caption %><% } else { %><%= custom_caption %> <% } %>
             </div>

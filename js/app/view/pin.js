@@ -33,8 +33,7 @@ define(["app/common"], function(common) {
             });
 
             // Get location. Either content or home.
-            var loc = _.isNull(this.model.get("location"))
-                            ? this.model.get("home") : this.model.get("location"),
+            var loc = this.model.getlocation(),
                 tplhtml = _.template($("#ifstpl__popup").html(), this.model.attributes);
 
             this.layer = L.marker([loc.latitude, loc.longitude], { icon : icon });

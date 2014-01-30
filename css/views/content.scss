@@ -10,7 +10,7 @@
     padding: 112px 25px 0 0;
     width: ($item-width+$item-border)*2;
 
-    @media (max-width: ($item-width+$item-border)*2) {
+    @media (max-width: 508px) {
         width: ($item-width+$item-border);
     }
 

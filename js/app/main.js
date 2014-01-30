@@ -25,8 +25,10 @@ function( common, venuedata, countrymapdata,
                 return this.primarylocation
             }
 
+            console.log(!_.has(this.attributes, "location") , _.isNull(this.get("location")), (!_.has(this.attributes, "location") || _.isNull(this.get("location")))
+);
             // Get location. Either content or home.
-            this.primarylocation= _.isNull(this.get("location"))
+            this.primarylocation= (!_.has(this.attributes, "location") || _.isNull(this.get("location")))
                             ? this.get("home") : this.get("location");
 
             return this.primarylocation
@@ -265,7 +267,7 @@ function( common, venuedata, countrymapdata,
     $(function(){
 
         var dataurl = "http://mysterious-crag-7636.herokuapp.com/output.json";
-        // var dataurl = "http://localhost:5000/output.json";
+        var dataurl = "http://localhost:5000/output.json";
 
         $.getJSON( dataurl, function( data ) {
             app.handleData( data, JSON.parse(countrymapdata) );
