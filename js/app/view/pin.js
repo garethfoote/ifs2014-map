@@ -15,13 +15,15 @@ define(["app/common"], function(common) {
         render : function( map ){
 
             var icon, ratioPin = 161/100, ratioShadow = 116/156,
-                widthPin = 50, widthShadow = 78;
+                widthPin = 50, widthShadow = 78,
+                markercolour = (!this.model.get("country"))
+                                ? "grey" : "red";
 
             this.map = map;
 
             icon = L.icon({
-                    iconUrl: 'img/marker_red.png',
-                    iconRetinaUrl: 'img/marker_red@2x.png',
+                    iconUrl: 'img/marker_'+markercolour+'.png',
+                    iconRetinaUrl: 'img/marker_'+markercolour+'@2x.png',
                     shadowUrl: 'img/marker_shadow.png',
                     shadowRetinaUrl: 'img/marker_shadow@2x.png',
 
@@ -31,6 +33,11 @@ define(["app/common"], function(common) {
                     shadowAnchor: [12, 10],
                     popupAnchor:  [0, -25]
             });
+
+            // If no custom caption. Avoids error in templating.
+            if(!_.has(this.model.attributes, "country")){
+                this.model.set("country", null, { silent : true });
+            }
 
             // Get location. Either content or home.
             var loc = this.model.getlocation(),
