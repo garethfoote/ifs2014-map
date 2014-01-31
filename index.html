@@ -91,8 +91,10 @@
                 <div style="background-image: url('<%= images.low_resolution.url %>');"
                     class="replacement"></div>
             </div>
-            <% } %>
             <div class="content-item__box">
+            <% } else { %>
+            <div class="content-item__box content-item__box--caption-only">
+            <% } %>
                 <% if(caption && caption.text) { %><%= caption.text+" "+custom_caption %><% } else { %><%= custom_caption %> <% } %>
             </div>
             <div class="content-item__box content-item__user clearfix">

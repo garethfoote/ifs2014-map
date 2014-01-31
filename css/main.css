@@ -980,18 +980,24 @@ html, body {
   padding: 8px 7px;
   border-bottom: solid 1px #ececec; }
 
-/* line 51, views/content.scss */
+/* line 46, views/content.scss */
+.content-item__box--caption-only {
+  font-size: 18px;
+  font-style: italic;
+  padding: 10px; }
+
+/* line 57, views/content.scss */
 .content-item__profile {
   height: 32px;
   width: 32px;
   float: left; }
 
-/* line 57, views/content.scss */
+/* line 63, views/content.scss */
 .content-item__user-info {
   float: left;
   margin-left: 4px; }
 
-/* line 63, views/content.scss */
+/* line 69, views/content.scss */
 .content-item__country,
 .content-item__name {
   overflow: hidden;
@@ -1000,39 +1006,39 @@ html, body {
   white-space: nowrap;
   color: black; }
 
-/* line 72, views/content.scss */
+/* line 78, views/content.scss */
 .content-item__country {
   color: #f72a34; }
 
-/* line 76, views/content.scss */
+/* line 82, views/content.scss */
 .content-item__custom-tags {
   list-style: none;
   margin: 0;
   padding: 0;
   float: left;
   color: #bbbbbb; }
-  /* line 82, views/content.scss */
+  /* line 88, views/content.scss */
   .content-item__custom-tags li {
     display: inline-block;
     margin-left: 3px; }
-    /* line 85, views/content.scss */
+    /* line 91, views/content.scss */
     .content-item__custom-tags li:after {
       position: relative;
       left: 1px;
       content: "/";
       height: 75%; }
-    /* line 91, views/content.scss */
+    /* line 97, views/content.scss */
     .content-item__custom-tags li:last-child:after {
       content: ""; }
 
-/* line 97, views/content.scss */
+/* line 103, views/content.scss */
 .content-item__image {
   min-height: 170px;
   position: relative; }
-  /* line 100, views/content.scss */
+  /* line 106, views/content.scss */
   .content-item__image img {
     visibility: hidden; }
-  /* line 103, views/content.scss */
+  /* line 109, views/content.scss */
   .content-item__image .replacement {
     -webkit-border-radius: 3px 3px 0 0;
     -ms-border-radius: 3px 3px 0 0;
@@ -1045,13 +1051,13 @@ html, body {
     height: 100%;
     background-size: 100% 100%; }
 
-/* line 115, views/content.scss */
+/* line 121, views/content.scss */
 .lt-ie9 .content-item__image {
   position: static; }
-  /* line 117, views/content.scss */
+  /* line 123, views/content.scss */
   .lt-ie9 .content-item__image img {
     visibility: visible; }
-/* line 121, views/content.scss */
+/* line 127, views/content.scss */
 .lt-ie9 .replacement {
   display: none; }
 
