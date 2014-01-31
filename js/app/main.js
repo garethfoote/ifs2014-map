@@ -272,7 +272,7 @@ function( common, venuedata, countrymapdata,
     $(function(){
 
         var dataurl = "http://mysterious-crag-7636.herokuapp.com/output.json";
-        var dataurl = "http://localhost:5000/output.json";
+        // var dataurl = "http://localhost:5000/output.json";
 
         $.getJSON( dataurl, function( data ) {
             app.handleData( data, JSON.parse(countrymapdata) );
