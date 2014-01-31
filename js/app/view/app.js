@@ -17,6 +17,8 @@ function( common, countrymapdata, ContentView, FilterPanelView, PinView ) {
                 customtags = item.get("custom_tags"),
                 removeindex = -1;
 
+            // Source.
+            item.set("source", item.get("type"));
             if( _.contains(customtags, "showcase") ){
                 item.set("type", "showcase");
             } else {
