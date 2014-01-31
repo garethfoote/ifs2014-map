@@ -771,60 +771,63 @@ input[type="email"] {
 html, body {
   overflow: hidden;
   height: 100%;
-  font-family: "Abel", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono", monospace; }
+  font-family: "Abel", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono", monospace;
+  font-weight: normal; }
 
-/* line 7, views/app.scss */
+/* line 8, views/app.scss */
 #app {
   width: 100%;
   height: 100%; }
 
-/* line 12, views/app.scss */
+/* line 13, views/app.scss */
 .app.s_976 {
   width: 976px;
   height: 500px; }
 
-/* line 17, views/app.scss */
+/* line 18, views/app.scss */
 .overlay {
   margin-top: 0px;
   position: absolute;
   top: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100%; }
+  height: 100%;
+  z-index: 10; }
 
-/* line 27, views/app.scss */
+/* line 29, views/app.scss */
 .is-empty .overlay--content {
   width: 0; }
 
-/* line 32, views/app.scss */
+/* line 34, views/app.scss */
 .overlay--content {
   left: 127px;
   background-color: #d8d6d7;
   background-color: rgba(216, 214, 215, 0.8); }
-  /* line 35, views/app.scss */
+  /* line 37, views/app.scss */
   .overlay--content .overlay__inner {
     height: 100%; }
 
-/* line 40, views/app.scss */
+/* line 42, views/app.scss */
 .has-hidden-filters .overlay--content {
   left: 0; }
 
-/* line 44, views/app.scss */
+/* line 46, views/app.scss */
 .control-info {
   position: absolute;
+  z-index: 11;
   top: 0;
   left: 127px;
   width: 356px; }
   @media (max-width: 356px) {
-    /* line 44, views/app.scss */
+    /* line 46, views/app.scss */
     .control-info {
       width: 178px; } }
 
-/* line 55, views/app.scss */
+/* line 58, views/app.scss */
 .has-hidden-filters .control-info {
   left: 0; }
 
-/* line 60, views/app.scss */
+/* line 63, views/app.scss */
 .control-info__pane {
   display: block;
   width: auto;
@@ -837,48 +840,48 @@ html, body {
   text-transform: uppercase;
   letter-spacing: 1px; }
 
-/* line 64, views/app.scss */
+/* line 67, views/app.scss */
 .control-info__toggle-filters {
   text-align: center;
   border-left: solid 1px #ececec; }
-  /* line 67, views/app.scss */
+  /* line 70, views/app.scss */
   .control-info__toggle-filters:after {
     position: relative;
     display: block;
     width: auto;
     height: 32px;
     content: "\2192  Show"; }
-  /* line 74, views/app.scss */
+  /* line 77, views/app.scss */
   .control-info__toggle-filters.is-open:after {
     content: "\2190  Hide"; }
-  /* line 78, views/app.scss */
+  /* line 81, views/app.scss */
   .control-info__toggle-filters:hover {
     background-color: #d8d6d7;
     background-color: #d8d6d7; }
 
-/* line 83, views/app.scss */
+/* line 86, views/app.scss */
 .control-info__zoom {
   border-left: solid 1px #ececec; }
 
-/* line 86, views/app.scss */
+/* line 89, views/app.scss */
 .control-info__country {
   display: none;
   border-left: solid 1px #ececec;
   clear: left; }
-  /* line 90, views/app.scss */
+  /* line 93, views/app.scss */
   .control-info__country.has-filter {
     display: block; }
 
-/* line 96, views/app.scss */
+/* line 99, views/app.scss */
 .is-empty .control-info__zoom {
   display: block; }
 
-/* line 101, views/app.scss */
+/* line 104, views/app.scss */
 .control-info__filtered-country {
   text-transform: uppercase;
   color: #f72a34; }
 
-/* line 106, views/app.scss */
+/* line 109, views/app.scss */
 .control-info__fullscreen {
   position: absolute;
   left: 100%;
@@ -886,29 +889,29 @@ html, body {
   margin: -30px 0 0 -96px;
   width: 86px;
   text-align: center; }
-  /* line 113, views/app.scss */
+  /* line 116, views/app.scss */
   .control-info__fullscreen:hover {
     background-color: #d8d6d7;
     background-color: #d8d6d7; }
 
 /* Let's get this party started */
-/* line 119, views/app.scss */
+/* line 122, views/app.scss */
 ::-webkit-scrollbar {
   width: 6px;
   opacity: 0.5; }
 
 /* Track */
-/* line 125, views/app.scss */
+/* line 128, views/app.scss */
 ::-webkit-scrollbar-track {
   height: 95%;
   padding: 10px 0; }
 
 /* Handle */
-/* line 132, views/app.scss */
+/* line 135, views/app.scss */
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 0, 0, 0.8); }
 
-/* line 137, views/app.scss */
+/* line 140, views/app.scss */
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4); }
 
@@ -924,10 +927,10 @@ html, body {
   background-color: red; }
 
 /* line 12, views/map.scss */
-.map__popup-title {
+.map__popup-name {
   font-weight: bold; }
 
-/* line 17, views/map.scss */
+/* line 16, views/map.scss */
 .map__popup {
   text-align: center; }
 
@@ -935,24 +938,25 @@ html, body {
 #content {
   min-height: 100%;
   left: 0;
-  letter-spacing: 1px; }
+  letter-spacing: 1px;
+  font-weight: normal; }
 
-/* line 9, views/content.scss */
+/* line 10, views/content.scss */
 .content__items {
   padding: 112px 25px 0 0;
   width: 356px; }
-  @media (max-width: 356px) {
-    /* line 9, views/content.scss */
+  @media (max-width: 508px) {
+    /* line 10, views/content.scss */
     .content__items {
       width: 178px; } }
-  /* line 17, views/content.scss */
+  /* line 18, views/content.scss */
   .content__items.is-focussed .content-item {
     opacity: 0.3; }
-    /* line 19, views/content.scss */
+    /* line 20, views/content.scss */
     .content__items.is-focussed .content-item.is-focussed {
       opacity: 1; }
 
-/* line 25, views/content.scss */
+/* line 26, views/content.scss */
 .content-item {
   width: 170px;
   background: white;
@@ -971,23 +975,23 @@ html, body {
   -moz-hyphens: auto;
   hyphens: auto; }
 
-/* line 40, views/content.scss */
+/* line 41, views/content.scss */
 .content-item__box {
   padding: 8px 7px;
   border-bottom: solid 1px #ececec; }
 
-/* line 50, views/content.scss */
+/* line 51, views/content.scss */
 .content-item__profile {
   height: 32px;
   width: 32px;
   float: left; }
 
-/* line 56, views/content.scss */
+/* line 57, views/content.scss */
 .content-item__user-info {
   float: left;
   margin-left: 4px; }
 
-/* line 62, views/content.scss */
+/* line 63, views/content.scss */
 .content-item__country,
 .content-item__name {
   overflow: hidden;
@@ -996,39 +1000,39 @@ html, body {
   white-space: nowrap;
   color: black; }
 
-/* line 71, views/content.scss */
+/* line 72, views/content.scss */
 .content-item__country {
   color: #f72a34; }
 
-/* line 75, views/content.scss */
+/* line 76, views/content.scss */
 .content-item__custom-tags {
   list-style: none;
   margin: 0;
   padding: 0;
   float: left;
   color: #bbbbbb; }
-  /* line 81, views/content.scss */
+  /* line 82, views/content.scss */
   .content-item__custom-tags li {
     display: inline-block;
     margin-left: 3px; }
-    /* line 84, views/content.scss */
+    /* line 85, views/content.scss */
     .content-item__custom-tags li:after {
       position: relative;
       left: 1px;
       content: "/";
       height: 75%; }
-    /* line 90, views/content.scss */
+    /* line 91, views/content.scss */
     .content-item__custom-tags li:last-child:after {
       content: ""; }
 
-/* line 96, views/content.scss */
+/* line 97, views/content.scss */
 .content-item__image {
   min-height: 170px;
   position: relative; }
-  /* line 99, views/content.scss */
+  /* line 100, views/content.scss */
   .content-item__image img {
     visibility: hidden; }
-  /* line 102, views/content.scss */
+  /* line 103, views/content.scss */
   .content-item__image .replacement {
     -webkit-border-radius: 3px 3px 0 0;
     -ms-border-radius: 3px 3px 0 0;
@@ -1041,13 +1045,13 @@ html, body {
     height: 100%;
     background-size: 100% 100%; }
 
-/* line 114, views/content.scss */
+/* line 115, views/content.scss */
 .lt-ie9 .content-item__image {
   position: static; }
-  /* line 116, views/content.scss */
+  /* line 117, views/content.scss */
   .lt-ie9 .content-item__image img {
     visibility: visible; }
-/* line 120, views/content.scss */
+/* line 121, views/content.scss */
 .lt-ie9 .replacement {
   display: none; }
 

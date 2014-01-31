@@ -21,13 +21,16 @@ function( common, venuedata, countrymapdata,
 
         getlocation : function(){
 
+            var fallback = ( this.get("type") === "showcase" )
+                            ? this.get("venue") : this.get("home");
+
             if( this.primarylocation ) {
                 return this.primarylocation
             }
 
             // Get location. Either content or home.
-            this.primarylocation= _.isNull(this.get("location"))
-                            ? this.get("home") : this.get("location");
+            this.primarylocation= (!_.has(this.attributes, "location") || _.isNull(this.get("location")))
+                            ? fallback : this.get("location");
 
             return this.primarylocation
         }
@@ -76,6 +79,7 @@ function( common, venuedata, countrymapdata,
                 appview = new AppView({collection: models, countries : countries});
                 appview.render();
 
+
                 // Create country models.
                 for( var c in countrymap ){
                     countrymap[c].country = c;
@@ -100,6 +104,9 @@ function( common, venuedata, countrymapdata,
 
                 // Cache first zoom.
                 lastzoom = appview.map.getZoom();
+
+                // Init view.
+                filterType();
 
             },
 
@@ -265,7 +272,7 @@ function( common, venuedata, countrymapdata,
     $(function(){
 
         var dataurl = "http://mysterious-crag-7636.herokuapp.com/output.json";
-        // var dataurl = "http://localhost:5000/output.json";
+        var dataurl = "http://localhost:5000/output.json";
 
         $.getJSON( dataurl, function( data ) {
             app.handleData( data, JSON.parse(countrymapdata) );

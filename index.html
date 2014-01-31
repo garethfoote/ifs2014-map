@@ -70,9 +70,10 @@
         <script id="ifstpl__popup" type="text/template">
 
             <div class="popup map__popup">
-                <div class="map__popup-title">Designer</div>
-                <span class="map__popup-name"><%= name %></span><br/>
-                <span class="map__popup-country">from <%= country %></span>
+                <span class="map__popup-name"><%= user.full_name %></span><br/>
+                <% if(country) { %>
+                <span class="map__popup-country"><%= country %></span>
+                <% } %>
             </div>
 
         </script>
@@ -84,22 +85,29 @@
         </script>
 
         <script id="ifstpl__content-item" type="text/template">
-
+            <% if(images) { %>
             <div class="content-item__image">
                 <img src="<%= images.low_resolution.url %>" />
                 <div style="background-image: url('<%= images.low_resolution.url %>');"
                     class="replacement"></div>
             </div>
+            <% } %>
             <div class="content-item__box">
                 <% if(caption && caption.text) { %><%= caption.text+" "+custom_caption %><% } else { %><%= custom_caption %> <% } %>
             </div>
             <div class="content-item__box content-item__user clearfix">
+                <% if(source==="instagram") { %>
                 <a target="_blank" class="content-item__profile" href="http://instagram.com/<%=user.username %>">
+                <% } else { %>
+                <a target="_blank" class="content-item__profile" href="http://twitter.com/<%=user.username %>">
+                <% } %>
                     <img title="<%=user.username %> Profile Picture" src="<%= user.profile_picture %>" />
                 </a>
                 <div class="content-item__user-info">
                     <span class="content-item__name"><%= user.full_name %></span>
+                    <% if(country) { %>
                     <span class="content-item__country"><%= country %> / <%= shortcode %></span>
+                    <% } %>
                 </div>
             </div>
             <div class="content-item__box clearfix">
