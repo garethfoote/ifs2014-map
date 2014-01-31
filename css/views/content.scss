@@ -43,6 +43,12 @@
     border-bottom: solid 1px #ececec;
 }
 
+.content-item__box--caption-only {
+    font-size: 18px;
+    font-style: italic;
+    padding: 10px;
+}
+
 $user-height: 32px;
 .content-item__user {
 
