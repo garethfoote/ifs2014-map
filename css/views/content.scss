@@ -16,8 +16,10 @@
     }
 
     &.is-focussed .content-item {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
         opacity: 0.3;
         &.is-focussed {
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
             opacity: 1;
         }
     }
