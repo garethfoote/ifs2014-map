@@ -34,11 +34,6 @@ define(["app/common"], function(common) {
                     popupAnchor:  [0, -25]
             });
 
-            // If no custom caption. Avoids error in templating.
-            if(!_.has(this.model.attributes, "country")){
-                this.model.set("country", null, { silent : true });
-            }
-
             // Get location. Either content or home.
             var loc = this.model.getlocation(),
                 tplhtml = _.template($("#ifstpl__popup").html(), this.model.attributes);
@@ -86,6 +81,7 @@ define(["app/common"], function(common) {
         popupclosehandler : function( e ){
 
             this.unfocus();
+            common.trigger("pinunclick", this.model.getlocation());
 
         },
 

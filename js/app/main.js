@@ -64,6 +64,32 @@ function( common, venuedata, countrymapdata,
             currentcountryfilter = "",
             lastzoom = -1,
 
+            fillmissingdata = function(data){
+
+                // If no images. Avoids error in templating.
+                if(!_.has(data, "images")){
+                    data.images = false;
+                }
+
+                // If no custom caption. 
+                if(!_.has(data, "custom_caption")){
+                    data.custom_caption = "";
+                }
+
+                // If no custom tags. 
+                if(!_.has(data, "custom_tags") || _.isNull(data.custom_tags)) {
+                    data.custom_tags = [];
+                }
+
+                // If no country.
+                if(!_.has(data, "country")){
+                    this.country = null;
+                }
+
+                return data;
+
+            },
+
             handleData = function( contentdata, countrymap ){
 
                 // Loop all items.
@@ -73,7 +99,8 @@ function( common, venuedata, countrymapdata,
 
                     contentdata[i].exhibition = ( _.has(countrymap, contentdata[i].country))
                             ? countrymap[contentdata[i].country].exhibition : "";
-                    models.add(contentdata[i]);
+
+                    models.add(fillmissingdata(contentdata[i]));
                 }
 
                 appview = new AppView({collection: models, countries : countries});
