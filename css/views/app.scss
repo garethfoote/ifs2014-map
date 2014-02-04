@@ -26,8 +26,10 @@ html, body {
 }
 
 .is-empty {
+    .overlay--content-nav,
     .overlay--content {
         width: 0;
+        height: 0;
     }
 }
 
@@ -39,13 +41,32 @@ html, body {
     }
 }
 
-.has-hidden-filters .overlay--content {
-    left: 0;
+.overlay--content-nav {
+    z-index: 12;
+    overflow: visible;
+    width: $scrollbar-width;
+    left: 127px + 20px - ($scrollbar-width*3) + (($item-width+$item-border)*2);
+
+    @media (max-width: 508px) {
+        left: 127px + 20px - ($scrollbar-width*3) + $item-width+$item-border;
+    }
+}
+
+.has-hidden-filters {
+    .overlay--content {
+        left: 0;
+    }
+    .overlay--content-nav {
+        left: 20px - ($scrollbar-width*3) + (($item-width+$item-border)*2);
+        @media (max-width: 508px) {
+            left: 20px - ($scrollbar-width*3) + $item-width+$item-border;
+        }
+    }
 }
 
 .control-info {
     position: absolute;
-    z-index: 11;
+    z-index: 12;
     top: 0;
     left: (95+8+8+16)*1px;
     width: ($item-width+$item-border)*2;
@@ -62,6 +83,11 @@ html, body {
 $size: 32px;
 .control-info__pane {
     @include cta($size);
+}
+
+.control-info__pane-label {
+    display: block;
+    float: left;
 }
 
 .control-info__toggle-filters {
@@ -101,9 +127,16 @@ $size: 32px;
     }
 }
 
+.control-info__filtered-exhibition,
 .control-info__filtered-country {
     text-transform: uppercase;
     color: $colour-filteractive;
+    display: block;
+    margin-left: 68px;
+}
+
+.control-info__filtered-country {
+    margin-left: 56px;
 }
 
 .control-info__fullscreen {
@@ -120,8 +153,7 @@ $size: 32px;
 
 /* Let's get this party started */
 ::-webkit-scrollbar {
-    width: 6px;
-    opacity: 0.5;
+    width: $scrollbar-width;
 }
 
 /* Track */
@@ -133,11 +165,11 @@ $size: 32px;
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgba(255,0,0,0.8); 
+    @include rgba-fb("bg", $colour-content-scrollbar, 0.7);
     // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
     // background: #fff000;
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(255,0,0,0.4); 
+    @include rgba-fb("bg", $colour-content-scrollbar, 0.4);
 }
 

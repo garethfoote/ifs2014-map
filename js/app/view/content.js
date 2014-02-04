@@ -5,6 +5,8 @@ define(["app/common", "app/view/contentitem" ], function(common, ItemView) {
         el : $("#content"),
         $contentcontainer : {},
         $contentitems : {},
+        $navaids : {},
+        navitemtpl : "",
         children : {},
         timekeys : [],
         timemap  : {},
@@ -18,26 +20,102 @@ define(["app/common", "app/view/contentitem" ], function(common, ItemView) {
 
             this.$contentcontainer = this.$(".content__items");
             this.$contentitems = this.$(".content-item");
+            this.$navaids = $(".content-nav");
 
             this.pckry = common.initPackery( this.$contentcontainer.get(0), {
                 itemSelector: '.content-item',
                 transitionDuration: "0s"
             });
 
+            navitemtpl = _.template($('#ifstpl__content-nav-item').html());
+            common.on("pinclick", this.createnavigationaid, this);
+            common.on("pinunclick", this.createnavigationaid, this);
+
         },
 
+        // Called whenever content items have finished being laid out.
         layout : function( numitems ){
 
-            var self = this;
+            var self = this,
+                areallcomplete = true;
 
-            self.pckry.reloadItems();
-            self.pckry.layout();
-
-            if( this.$contentitems.length > 0 ){
-                $("#app").removeClass("is-empty");
-            } else {
+            if( this.$contentitems.length === 0 ){
                 $("#app").addClass("is-empty");
+            } else {
+
+                // Must show first otherwise no image loading.
+                $("#app").removeClass("is-empty");
+
+                // Layout chronolgically listed items.
+                this.pckry.reloadItems();
+                this.pckry.layout();
+
+                $("img", this.$contentitems).each(function(index, el){
+                    if( el.complete===false || el.height === 0 ){
+                        areallcomplete = false;
+                        // Give it a second in case this has
+                        // already rendered and gets called immediately 
+                        // causeing infinte loopage.
+                        setTimeout(function(){
+                            $(el).load(self.layout.call(self));
+                        }, 100);
+                        // Break out of each function.
+                        return false;
+                    }
+                });
+
+                if( ! areallcomplete ){
+                    return;
+                }
+
+                // Create navigation aid...but not
+                // until all images have loaded correctly.
+                this.createnavigationaid();
             }
+
+        },
+
+        createnavigationaid : function(){
+
+            var self = this,
+                focussed = [],
+                navobj = { $el : {}, ypos : 0, height : 0 },
+                ch = this.$contentcontainer.height(),
+                wh = $(window).height();
+
+            this.$navaids.empty();
+
+            // If there are no items or there is no
+            // scrollbar don't bother with this.
+            if( this.$contentitems.length === 0
+                    || ch<wh){
+                return;
+            }
+
+
+            // For each focussed item create representative
+            // scrollbar item.
+            this.$contentitems.each(function(index, el){
+                var $el = $(el),
+                    $navel,
+                    pos,
+                    isfocussed = $el.hasClass("is-focussed");
+
+                if( isfocussed ){
+                    pos = $el.position();
+                    navobj = {
+                        $el: $el,
+                        navxpos : (pos.left===0)?"left":"right",
+                        itemypos : pos.top,
+                        navypos : (pos.top/ch)*wh,
+                        navheight : ($el.height()/ch)*wh
+                    };
+
+                    $navel =  $(navitemtpl(navobj));
+                    self.$navaids.append( $navel );
+                }
+            });
+
 
         },
 
@@ -106,7 +184,7 @@ define(["app/common", "app/view/contentitem" ], function(common, ItemView) {
                 // console.log("Already added", id);
             }
 
-            // Recache content-items.
+            // Recache jquery object content-items.
             this.$contentitems = this.$(".content-item");
 
         },

@@ -45,6 +45,7 @@
                     </div>
                 </div>
             </div>
+            <div class="overlay overlay--content-nav content-nav"></div>
             <div class="overlay overlay--content">
                 <div class="overlay__inner clearfix">
                     <div id="content">
@@ -58,10 +59,10 @@
                 <a class="control-info__pane control-info__toggle-filters js-toggle-filters is-open" href=""></a>
                 <div class="control-info__pane control-info__zoom js-info-zoom">ZOOM IN TO REVEAL CONTENT</div>
                 <div class="control-info__pane control-info__country js-info-country">
-                    Country: <span class="control-info__filtered-country js-info-filtered-country"</span>
+                    <span class="control-info__pane-label">Country:</span><span class="control-info__filtered-country js-info-filtered-country"</span>
                 </div>
                 <div class="control-info__pane control-info__country js-info-country">
-                    Exhibition: <span class="control-info__filtered-country js-info-filtered-exhibition"</span>
+                    <span class="control-info__pane-label">Exhibition:</span><span class="control-info__filtered-exhibition js-info-filtered-exhibition"</span>
                 </div>
             </div>
             <a href="" class="control-info__pane control-info__fullscreen js-fullscreen">Fullscreen</a>
@@ -75,6 +76,14 @@
                 <span class="map__popup-country"><%= country %></span>
                 <% } %>
             </div>
+
+        </script>
+
+        <script id="ifstpl__content-nav-item" type="text/template">
+
+            <a style="top:<%=navypos%>px;height:<%=navheight%>px;"
+               data-item-ypos="<%=itemypos%>"
+               class="content-nav-item content-nav-item--<%=navxpos%>"></a>
 
         </script>
 

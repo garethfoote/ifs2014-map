@@ -6,6 +6,7 @@ $base-width: 976px;
 // General
 $doc-font-size: 12;
 $doc-line-height: 18;
+$scrollbar-width: 6px;
 
 // $colour-panelbg: rgba(216, 214, 215, 0.75);
 $colour-panelbg: rgb(216, 214, 215);
@@ -19,6 +20,8 @@ $item-border-radius: 3px;
 $colour-content-name: #000;
 $colour-content-country: $brand-red;
 $colour-content-customtags: #bbbbbb;
+$colour-content-nav-aid: #9D9A9A;
+$colour-content-scrollbar: $brand-red;
 //Filters
 $colour-filteractive: $brand-red;
 // Control and info
