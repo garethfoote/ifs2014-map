@@ -29,21 +29,6 @@ define(["app/common"], function(common) {
 
         render : function(){
 
-            // If no custom caption. Avoids error in templating.
-            if(!_.has(this.model.attributes, "images")){
-                this.model.set("images", false, { silent : true });
-            }
-
-            // If no custom caption. Avoids error in templating.
-            if(!_.has(this.model.attributes, "custom_caption")){
-                this.model.set("custom_caption", "", { silent : true });
-            }
-
-            // If no custom tags. Avoids error in templating.
-            if(!_.has(this.model.attributes, "custom_tags") || _.isNull(this.model.get("custom_tags"))) {
-                this.model.set("custom_tags", [], { silent : true });
-            }
-
             // Render template.
             this.$el.html(this.template(this.model.attributes));
             // Add data for ordering and selection.
