@@ -26,17 +26,37 @@ define(["app/common", "app/view/contentitem" ], function(common, ItemView) {
 
         },
 
+        // Called whenever content items have finished being laid out.
         layout : function( numitems ){
 
-            var self = this;
+            var self = this,
+                areallcomplete = true;
 
-            self.pckry.reloadItems();
-            self.pckry.layout();
-
-            if( this.$contentitems.length > 0 ){
-                $("#app").removeClass("is-empty");
-            } else {
+            if( this.$contentitems.length === 0 ){
                 $("#app").addClass("is-empty");
+            } else {
+
+                // Must show first otherwise no image loading.
+                $("#app").removeClass("is-empty");
+
+                // Layout chronolgically listed items.
+                this.pckry.reloadItems();
+                this.pckry.layout();
+
+                $("img", this.$contentitems).each(function(index, el){
+                    if( el.complete===false || el.height === 0 ){
+                        areallcomplete = false;
+                        // Give it a second in case this has
+                        // already rendered and gets called immediately 
+                        // causeing infinte loopage.
+                        setTimeout(function(){
+                            $(el).load(self.layout.call(self));
+                        }, 100);
+                        // Break out of each function.
+                        return false;
+                    }
+                });
+
             }
 
         },
@@ -106,7 +126,7 @@ define(["app/common", "app/view/contentitem" ], function(common, ItemView) {
                 // console.log("Already added", id);
             }
 
-            // Recache content-items.
+            // Recache jquery object content-items.
             this.$contentitems = this.$(".content-item");
 
         },
