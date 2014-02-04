@@ -28,6 +28,7 @@ html, body {
 .is-empty {
     .overlay--content {
         width: 0;
+        height: 0;
     }
 }
 
@@ -62,6 +63,11 @@ html, body {
 $size: 32px;
 .control-info__pane {
     @include cta($size);
+}
+
+.control-info__pane-label {
+    display: block;
+    float: left;
 }
 
 .control-info__toggle-filters {
@@ -101,9 +107,16 @@ $size: 32px;
     }
 }
 
+.control-info__filtered-exhibition,
 .control-info__filtered-country {
     text-transform: uppercase;
     color: $colour-filteractive;
+    display: block;
+    margin-left: 68px;
+}
+
+.control-info__filtered-country {
+    margin-left: 56px;
 }
 
 .control-info__fullscreen {
