@@ -119,6 +119,9 @@ function( common, venuedata, countrymapdata,
                 });
                 common.on("filtertype", setType );
                 common.on("filtertypereset", function(){
+                    if( currenttype === "showcase" ){
+                        return;
+                    }
                     if( currentcountryfilter !== "" ){
                         filterCountry( currentcountryfilter );
                         appview.toggleoffcountryfilter();
@@ -214,7 +217,9 @@ function( common, venuedata, countrymapdata,
             filterType = function(){
 
                 var bounds = [],
-                    loc;
+                    loc, $el = $(".js-filter-type[data-type='"+currenttype+"']");
+
+                $el.addClass("is-selected");
 
                 models.each(function(item){
                     loc = item.getlocation();

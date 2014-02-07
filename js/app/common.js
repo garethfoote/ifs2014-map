@@ -7,7 +7,7 @@ define(["mapbox", "packery", "app/polyfills"], function(L, Packery) {
         var self = this,
             config = {
                 contentzoomthreshold : 5,
-                centrallondon : [51.501369818211096, -0.12651443481445312],
+                centrallondon : [51.51301590715673, -0.20290374755859375],
                 startpos : [25, -4],
                 startscale : 3
             },
