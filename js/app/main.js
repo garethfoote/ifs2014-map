@@ -119,6 +119,9 @@ function( common, venuedata, countrymapdata,
                 });
                 common.on("filtertype", setType );
                 common.on("filtertypereset", function(){
+                    if( currenttype === "showcase" ){
+                        return;
+                    }
                     if( currentcountryfilter !== "" ){
                         filterCountry( currentcountryfilter );
                         appview.toggleoffcountryfilter();
