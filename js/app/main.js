@@ -214,7 +214,9 @@ function( common, venuedata, countrymapdata,
             filterType = function(){
 
                 var bounds = [],
-                    loc;
+                    loc, $el = $(".js-filter-type[data-type='"+currenttype+"']");
+
+                $el.addClass("is-selected");
 
                 models.each(function(item){
                     loc = item.getlocation();
