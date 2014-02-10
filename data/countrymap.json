@@ -41,15 +41,11 @@
     },
     "Japan": {
         "shortcode": "JPN",
-        "exhibition": "J BLOW - 2014"
+        "exhibition": "J BLOW – 2014"
     },
     "Korea": {
         "shortcode": "KOR",
         "exhibition": "K-FASHION ODYSSEY"
-    },
-    "Nigeria": {
-        "shortcode": "NGA",
-        "exhibition": "KINGS AND QUEENS OF THE FUTURE"
     },
     "Pakistan": {
         "shortcode": "PAK",
@@ -69,7 +65,7 @@
     },
     "Québec, Canada": {
         "shortcode": "CA-QC",
-        "exhibition": "MONTRÉAL - THE WHITE WINTER FASHION CITY"
+        "exhibition": "MONTRÉAL – THE WHITE WINTER FASHION CITY"
     },
     "Romania": {
         "shortcode": "ROM",
