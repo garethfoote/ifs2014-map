@@ -60,7 +60,7 @@ function( common, venuedata, countrymapdata,
             models = new Items(),
             countries = new Countries(),
             appview = {},
-            currenttype = "studio";
+            currenttype = "showcase";
             currentcountryfilter = "",
             lastzoom = -1,
 
