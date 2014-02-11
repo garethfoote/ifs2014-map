@@ -34,15 +34,17 @@ function( common, countrymapdata, ContentView, FilterPanelView, PinView ) {
 
             loc = item.getlocation();
 
-            // If other pin exists here then just append model.
-            if( loc.latitude+""+loc.longitude in pins[type] ){
-                // Add model to same pin.
-                pins[type][loc.latitude+""+loc.longitude].addmodel( item );
-            } else {
-                // else make pin.
-                pin = new PinView({model:item}).render(map);
-                map.addLayer( pin.layer );
-                pins[type][loc.latitude+""+loc.longitude] = pin;
+            if( ! _.isUndefined( loc ) ){
+                // If other pin exists here then just append model.
+                if( loc.latitude+""+loc.longitude in pins[type] ){
+                    // Add model to same pin.
+                    pins[type][loc.latitude+""+loc.longitude].addmodel( item );
+                } else {
+                    // else make pin.
+                    pin = new PinView({model:item}).render(map);
+                    map.addLayer( pin.layer );
+                    pins[type][loc.latitude+""+loc.longitude] = pin;
+                }
             }
 
         });
