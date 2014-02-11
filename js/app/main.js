@@ -86,12 +86,20 @@ function( common, venuedata, countrymapdata,
                     this.country = null;
                 }
 
+                if( _.isNull(data.location)
+                        && !_.has(data, "venue")
+                        && !_.has(data, "home") ){
+                            console.log("No geo: ", data);
+                            return false;
+                        }
+
                 return data;
 
             },
 
             handleData = function( contentdata, countrymap ){
 
+                var filleddata = {};
                 // Loop all items.
                 for (var i = 0; i < contentdata.length; i++) {
                     contentdata[i].shortcode = ( _.has(countrymap, contentdata[i].country))
@@ -100,7 +108,10 @@ function( common, venuedata, countrymapdata,
                     contentdata[i].exhibition = ( _.has(countrymap, contentdata[i].country))
                             ? countrymap[contentdata[i].country].exhibition : "";
 
-                    models.add(fillmissingdata(contentdata[i]));
+                    filleddata = fillmissingdata(contentdata[i]);
+                    if( filleddata ){
+                        models.add( filleddata );
+                    }
                 }
 
                 appview = new AppView({collection: models, countries : countries});
