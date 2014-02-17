@@ -86,9 +86,10 @@ function( common, venuedata, countrymapdata,
                     this.country = null;
                 }
 
-                if( _.isNull(data.location)
+                if( (_.isNull(data.location)
                         && !_.has(data, "venue")
-                        && !_.has(data, "home") ){
+                        && !_.has(data, "home"))
+                        || (_.isObject(data.location) && !_.has(data.location, "latitude") )){
                             console.log("No geo: ", data);
                             return false;
                         }
