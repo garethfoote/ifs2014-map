@@ -55,7 +55,8 @@ module.exports = function(grunt) {
                  options: {
                        baseUrl: 'js',
                        paths : {
-                            "mapbox" : "empty:"
+                            "mapbox" : "empty:",
+                            "leaflet.grayscale" : "empty:"
                        },
                        // Include the main configuration file.
                        mainConfigFile: "js/app/config.js",

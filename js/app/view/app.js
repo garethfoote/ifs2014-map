@@ -97,7 +97,9 @@ function( common, countrymapdata, ContentView, FilterPanelView, PinView ) {
 
         initialize : function( options ){
 
-            var tileurl = 'http://{s}.tile.cloudmade.com/EF97C7CAB8924037BEFDF16FB9EE9BFD/119481/256/{z}/{x}/{y}.png',
+            // var tileurl = 'http://{s}.tile.cloudmade.com/EF97C7CAB8924037BEFDF16FB9EE9BFD/119481/256/{z}/{x}/{y}.png',
+            var tileurl = 'http://tile.openstreetmap.org/{z}/{x}/{y}.png',
+
                 mapoptions = {
                     zoomControl : false,
                     attributionControl: false
@@ -106,14 +108,15 @@ function( common, countrymapdata, ContentView, FilterPanelView, PinView ) {
                     maxZoom : 25,
                     minZoom : 2,
                     noWrap : true,
-                    attribution: "<a href='http:\/\/mapbox.com\/about\/maps' target='_blank'>Terms & Feedback<\/a>"
+                    attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
                 };
 
             this.map = L.map('map', mapoptions).setView(common.getConfig("startpos"), common.getConfig("startscale"));
             // L.mapbox.tileLayer('danielc-s.h0hhc1fe', tileoptions).addTo(this.map);
             // L.mapbox.tileLayer('garethfoote.gp6gm5ln', tileoptions).addTo(this.map);
-            L.tileLayer(tileurl, tileoptions).addTo(this.map);
+            L.tileLayer.grayscale(tileurl, tileoptions).addTo(this.map);
             L.control.zoom({ position : "topright" }).addTo(this.map);
+            L.control.attribution({position: 'bottomleft'}).addTo(this.map);
 
             common.on("pinclick", this.pinclickhandler, this);
 

@@ -1,4 +1,4 @@
-define(["mapbox", "packery", "app/polyfills"], function(L, Packery) {
+define(["mapbox", "packery", "leaflet.grayscale", "app/polyfills"], function(L, Packery) {
 
     var Common = function(){
 

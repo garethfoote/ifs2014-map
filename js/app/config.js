@@ -6,6 +6,7 @@ require.config({
         "text" : "vendor/require/text",
         "data" : "../data",
         "mapbox" : "vendor/mapbox/mapbox",
+        "leaflet.grayscale" : "vendor/leaflet/TileLayer.Grayscale",
         "packery" : "vendor/packery/packery.pkgd.min",
         "jquery" : "vendor/jquery/jquery-1.10.2.min",
         "jquery-cors" : "vendor/jquery/jquery.xdomainrequest.min",
@@ -14,7 +15,10 @@ require.config({
     },
     shim : {
         "app/main" : {
-            "deps" : [ "mapbox", "backbone", "app/polyfills" ]
+            "deps" : [ "mapbox", "backbone", "app/polyfills", "leaflet.grayscale" ]
+        },
+        "leaflet.grayscale" : {
+            "deps" : ["mapbox"]
         },
         "mapbox" : {
             "exports" : "L"
