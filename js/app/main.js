@@ -60,7 +60,7 @@ function( common, venuedata, countrymapdata,
             models = new Items(),
             countries = new Countries(),
             appview = {},
-            currenttype = "showcase";
+            currenttype = "studio";
             currentcountryfilter = "",
             lastzoom = -1,
 
@@ -315,10 +315,14 @@ function( common, venuedata, countrymapdata,
 
     $(function(){
 
-        var dataurl = "http://mysterious-crag-7636.herokuapp.com/output.json";
-        // var dataurl = "http://localhost:5000/output.json";
+        var LIVE = 0,
+            DEV  = 1,
+            ARCHIVE = 2,
+            dataurls = ["http://mysterious-crag-7636.herokuapp.com/output.json",
+                        "http://localhost:5000/output.json",
+                        "data/output.json"];
 
-        $.getJSON( dataurl, function( data ) {
+        $.getJSON( dataurls[ARCHIVE], function( data ) {
             app.handleData( data, JSON.parse(countrymapdata) );
             app.handleVenueData( JSON.parse(venuedata) );
         });
